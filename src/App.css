@@ -1,0 +1,18 @@
+#root {
+  width: 100%;
+}
+
+td {
+  vertical-align: top;
+}
+
+th {
+  text-align: center !important;
+}
+
+.line-clamp-400-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  width: 400px;
+}
