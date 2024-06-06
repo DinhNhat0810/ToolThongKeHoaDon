@@ -13,6 +13,7 @@ th {
 .line-clamp-400-2 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   width: 400px;
 }

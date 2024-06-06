@@ -91,20 +91,24 @@ import { Button } from "antd";
 // ];
 
 const ExcelExport = ({ data, fileName }: { data: any; fileName: string }) => {
-  console.log(data);
-
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(data);
 
-    worksheet["!cols"] = [{ wch: 10 }, { wch: 60 }, { wch: 20 }, { wch: 70 }];
-
-    // worksheet["!cols"] = [
-    //   { wch: 10 },
-    //   { wch: 30 },
-    //   { wch: 40 },
-    //   { wch: 30 },
-    //   { wch: 40 },
-    // ];
+    worksheet["!cols"] = [
+      { wch: 10 },
+      { wch: 60 },
+      { wch: 20 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+      { wch: 70 },
+    ];
 
     const workbook = XLSX.utils.book_new();
 

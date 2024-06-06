@@ -1,4 +1,4 @@
-import { TableProps } from "antd";
+import { TableProps, Tooltip } from "antd";
 
 export const columnsModal0: TableProps<any>["columns"] = [
   {
@@ -60,9 +60,11 @@ export const columnsModal2: TableProps<any>["columns"] = [
     dataIndex: "XMLThongdiep",
     render: (text: string) => {
       return (
-        <div className="line-clamp-400-2">
-          <p>{text}</p>
-        </div>
+        <Tooltip title={text}>
+          <div className="line-clamp-400-2">
+            <p>{text}</p>
+          </div>
+        </Tooltip>
       );
     },
   },
@@ -114,6 +116,29 @@ export const columnsModal5: TableProps<any>["columns"] = [
   {
     title: "Tổng loại TD phản hồi",
     dataIndex: "TongLoaiTDPhanhoi",
+  },
+  {
+    title: "MTDTChieu",
+    dataIndex: "MTDTChieu",
+  },
+];
+
+export const columnsModal6: TableProps<any>["columns"] = [
+  ...columnsModal1,
+  {
+    title: "IdMessage",
+    dataIndex: "IdMessage",
+  },
+];
+
+export const columnsModal7: TableProps<any>["columns"] = [
+  {
+    title: "STT",
+    dataIndex: "key",
+  },
+  {
+    title: "Số lượng",
+    dataIndex: "SL",
   },
   {
     title: "MTDTChieu",

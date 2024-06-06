@@ -30,8 +30,8 @@ const Home = ({ children }: Props) => {
     },
 
     {
-      key: "/log",
-      label: "Nhật ký",
+      key: "/ca-he-thong",
+      label: "Cả hệ thống",
       icon: <HomeOutlined />,
     },
 

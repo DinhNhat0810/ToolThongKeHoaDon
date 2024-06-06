@@ -230,7 +230,7 @@ export const laydlbaocaothongdiep2024_200_tru1LOGIGO = async (
   });
 };
 
-export const laydlbaocaothongdiep2024_200_Khongco202or204 = async (
+export const laydlbaocaothongdiep2024_200_Khongco202or204LOGIGO = async (
   startDate: string,
   endDate: string
 ): AxiosPromise<ResponseType> => {
@@ -255,7 +255,7 @@ export const laydlbaocaothongdiep2024_200_Khongco202or204 = async (
   });
 };
 
-export const laydlbaocaothongdiep2024_200_Khongco999 = async (
+export const laydlbaocaothongdiep2024_200_Khongco999LOGIGO = async (
   startDate: string,
   endDate: string
 ): AxiosPromise<ResponseType> => {
@@ -589,10 +589,10 @@ export const laydlbaocao400LOGIGO = async (
   const soapEnvelope = `
   <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
-    <laydlbaocao400LOGIGO  xmlns="http://tempuri.org/">
+    <laydlbaocao400 xmlns="http://tempuri.org/">
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
-    </laydlbaocao400LOGIGO>
+    </laydlbaocao400>
   </soap12:Body>
 </soap12:Envelope>
       `;
@@ -668,6 +668,144 @@ export const laydlbaocao400_204thuaLOGIGO = async (
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
     </laydlbaocao400_204thua>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+//All
+export const laydlbaocao2024_thongdiepthuetraveLOGIGO = async (
+  startDate: string,
+  MTDTChieu: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <laydlbaocao2024_thongdiepthuetrave xmlns="http://tempuri.org/">
+      <tungay>${startDate}</tungay>
+      <MTDTChieu>${MTDTChieu}</MTDTChieu>
+    </laydlbaocao2024_thongdiepthuetrave>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+export const laydlbaocao2024_sothongdiepthuetraveLOGIGO = async (
+  startDate: string,
+  endDate: string,
+  MLTDiepxet: string,
+  SLThongdiepxet: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <laydlbaocao2024_sothongdiepthuetrave xmlns="http://tempuri.org/">
+      <tungay>${startDate}</tungay>
+      <denngay>${endDate}</denngay>
+      <SLThongdiepxet>${SLThongdiepxet}</SLThongdiepxet>
+      <MLTDiepxet>${MLTDiepxet}</MLTDiepxet>
+    </laydlbaocao2024_sothongdiepthuetrave>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+export const laydlbaocaothongdiep2024_MTDTChieuLOGIGO = async (
+  MTDTChieu: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <laydlbaocaothongdiep2024_MTDTChieu xmlns="http://tempuri.org/">
+    <MTDTChieu>${MTDTChieu}</MTDTChieu>
+    </laydlbaocaothongdiep2024_MTDTChieu>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+export const laydlbaocaothongdiep2024LOGIGO = async (
+  startDate: string,
+  endDate: string,
+  MST: string,
+  KHMSHDon: string,
+  KHHDon: string,
+  SHDon: string,
+  HDMTTien: number
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <laydlbaocaothongdiep2024 xmlns="http://tempuri.org/">
+      <tungay>${startDate}</tungay>
+      <denngay>${endDate}</denngay>
+      <MST>${MST}</MST>
+      <KHMSHDon>${KHMSHDon}</KHMSHDon>
+      <KHHDon>${KHHDon}</KHHDon>
+      <SHDon>${SHDon}</SHDon>
+      <HDMTTien>${HDMTTien}</HDMTTien>
+    </laydlbaocaothongdiep2024>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+export const AQuetFile_MTDTChieuLOGIGO = async (
+  Thoigian: string,
+  MTDTChieu: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <AQuetFile_MTDTChieu xmlns="http://tempuri.org/">
+      <Thoigian>${Thoigian}</Thoigian>
+      <MTDTChieu>${MTDTChieu}</MTDTChieu>
+    </AQuetFile_MTDTChieu>
   </soap12:Body>
 </soap12:Envelope>
       `;
