@@ -46,8 +46,12 @@ export const THIEU_DU_200: {
     value: "Check_TK_999",
   },
   {
-    name: "Check TĐ thiếu 200 (không bao gồm TĐ -1):",
-    value: "Check_TK_200",
+    name: "Check TĐ thiếu 200 (không bao gồm TĐ -1) 202:",
+    value: "Check_TK_200_202",
+  },
+  {
+    name: "Check TĐ thiếu 200 (không bao gồm TĐ -1) 999:",
+    value: "Check_TK_200_999",
   },
 ];
 
@@ -74,7 +78,11 @@ export type DataType200 = {
       length: number;
       data: any[];
     };
-    Check_TK_200: {
+    Check_TK_200_202: {
+      length: number;
+      data: any[];
+    };
+    Check_TK_200_999: {
       length: number;
       data: any[];
     };
@@ -100,7 +108,11 @@ export type DataType200 = {
       length: number;
       data: any[];
     };
-    Check_TK_200: {
+    Check_TK_200_202: {
+      length: number;
+      data: any[];
+    };
+    Check_TK_200_999: {
       length: number;
       data: any[];
     };

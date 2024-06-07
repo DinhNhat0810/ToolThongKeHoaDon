@@ -34,15 +34,15 @@ export const THIEU_DU_100: {
   value: string;
 }[] = [
   {
-    name: "Thông điệp nhận thiếu 103:",
+    name: "Thông điệp 100 thiếu MLTDiep-103:",
     value: "Thieu_du_103",
   },
   {
-    name: "Thông điệp nhận thiếu 102 hoặc 103:",
+    name: "Thông điệp 100 thiếu MLTDiep-102:",
     value: "Thieu_du_102_103",
   },
   {
-    name: "Thông điệp nhận thiếu 102 hoặc 103 hoặc 999:",
+    name: "Thông điệp 100 thiếu MLTDiep-999:",
     value: "Thieu_du_102_103_999",
   },
 ];

@@ -10,13 +10,11 @@ import {
 } from "antd";
 import { useMemo, useRef, useState } from "react";
 import {
-  Laythongdiep200thieu_MTDiepLOGIGO,
+  Laythongdiep100thieu_MLTDiepLOGIGO,
+  Laythongdiep200thieu_MLTDiepLOGIGO,
   Laythongdiep203thieu_MTDiepLOGIGO,
   laydlbaocao100LOGIGO,
   laydlbaocao100_Thieu102LOGIGO,
-  laydlbaocao100_Thieu102or103LOGIGO,
-  laydlbaocao100_Thieu102or103or999LOGIGO,
-  laydlbaocao100_Thieu103LOGIGO,
   laydlbaocao100_Thieu999LOGIGO,
   laydlbaocao200LOGIGO,
   laydlbaocao203LOGIGO,
@@ -40,13 +38,11 @@ import {
 } from "../../services/logigo";
 import { convertXmlToJson } from "../../libs/common";
 import {
-  Laythongdiep200thieu_MTDiepCA2,
+  Laythongdiep100thieu_MLTDiepCA2,
+  Laythongdiep200thieu_MLTDiepCA2,
   Laythongdiep203thieu_MTDiepCA2,
   laydlbaocao100CA2,
   laydlbaocao100_Thieu102CA2,
-  laydlbaocao100_Thieu102or103CA2,
-  laydlbaocao100_Thieu102or103or999CA2,
-  laydlbaocao100_Thieu103CA2,
   laydlbaocao100_Thieu999CA2,
   laydlbaocao200CA2,
   laydlbaocao203CA2,
@@ -199,7 +195,11 @@ const inititalData: any[] = [
         length: 0,
         data: [],
       },
-      Check_TK_200: {
+      Check_TK_200_202: {
+        length: 0,
+        data: [],
+      },
+      Check_TK_200_999: {
         length: 0,
         data: [],
       },
@@ -225,7 +225,11 @@ const inititalData: any[] = [
         length: 0,
         data: [],
       },
-      Check_TK_200: {
+      Check_TK_200_202: {
+        length: 0,
+        data: [],
+      },
+      Check_TK_200_999: {
         length: 0,
         data: [],
       },
@@ -439,14 +443,6 @@ const Compose1 = () => {
     startDate: "",
     endDate: "",
   });
-  const [maMLTDiep200, setMaMLTDiep200] = useState({
-    ca2: optionMTLDiep.TD200[0].value,
-    logigo: optionMTLDiep.TD200[0].value,
-  });
-  const [maMLTDiep203, setMaMLTDiep203] = useState({
-    ca2: optionMTLDiep.TD203[0].value,
-    logigo: optionMTLDiep.TD203[0].value,
-  });
 
   const timeRef = useRef("");
 
@@ -478,13 +474,13 @@ const Compose1 = () => {
     if (type === "CA2") {
       switch (value) {
         case "Thieu_du_103":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "Thieu_du_102_103":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "Thieu_du_102_103_999":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "TD200_1":
           setColumnsModal(columnsModal2 || []);
@@ -492,7 +488,10 @@ const Compose1 = () => {
         case "Check_TK_999":
           setColumnsModal(columnsModal6 || []);
           break;
-        case "Check_TK_200":
+        case "Check_TK_200_202":
+          setColumnsModal(columnsModal6 || []);
+          break;
+        case "Check_TK_200_999":
           setColumnsModal(columnsModal6 || []);
           break;
         case "TD200_202_204":
@@ -539,13 +538,13 @@ const Compose1 = () => {
     if (type === "LOGIGO") {
       switch (value) {
         case "Thieu_du_103":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "Thieu_du_102_103":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "Thieu_du_102_103_999":
-          setColumnsModal(columnsModal0 || []);
+          setColumnsModal(columnsModal6 || []);
           break;
         case "TD200_1":
           setColumnsModal(columnsModal2 || []);
@@ -553,8 +552,11 @@ const Compose1 = () => {
         case "Check_TK_999":
           setColumnsModal(columnsModal1 || []);
           break;
-        case "Check_TK_200":
-          setColumnsModal(columnsModal1 || []);
+        case "Check_TK_200_202":
+          setColumnsModal(columnsModal6 || []);
+          break;
+        case "Check_TK_200_999":
+          setColumnsModal(columnsModal6 || []);
           break;
         case "TD200_202_204":
           setColumnsModal(columnsModal1 || []);
@@ -693,69 +695,6 @@ const Compose1 = () => {
                           }}
                         >
                           <span>{item?.name}</span>
-                          {item?.value === "Check_TK_200" && (
-                            <Select
-                              value={maMLTDiep200.ca2}
-                              onChange={(value) => {
-                                if (
-                                  time.startDate === "" ||
-                                  time.endDate === ""
-                                ) {
-                                  openNotificationWithIcon(
-                                    "error",
-                                    "Lỗi",
-                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
-                                  );
-                                  return;
-                                }
-
-                                setMaMLTDiep200((prev) => ({
-                                  ...prev,
-                                  ca2: value,
-                                }));
-                                handleChangeMLTD_200(
-                                  time.startDate,
-                                  time.endDate,
-                                  value,
-                                  "ca2"
-                                );
-                              }}
-                              options={[
-                                { value: "202", label: "202" },
-                                { value: "999", label: "999" },
-                              ]}
-                            />
-                          )}
-
-                          {item?.value === "TD203_Thieu" && (
-                            <Select
-                              value={maMLTDiep203.ca2}
-                              onChange={(value) => {
-                                if (
-                                  time.startDate === "" ||
-                                  time.endDate === ""
-                                ) {
-                                  openNotificationWithIcon(
-                                    "error",
-                                    "Lỗi",
-                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
-                                  );
-                                  return;
-                                }
-                                setMaMLTDiep203((prev) => ({
-                                  ...prev,
-                                  ca2: value,
-                                }));
-                                handleChangeMLTD_203(
-                                  time.startDate,
-                                  time.endDate,
-                                  value,
-                                  "ca2"
-                                );
-                              }}
-                              options={optionMTLDiep.TD203}
-                            />
-                          )}
                         </div>
                         <div>
                           <span
@@ -933,65 +872,6 @@ const Compose1 = () => {
                           }}
                         >
                           <span>{item?.name}</span>
-                          {item?.value === "Check_TK_200" && (
-                            <Select
-                              value={maMLTDiep200.logigo}
-                              onChange={(value) => {
-                                if (
-                                  time.startDate === "" ||
-                                  time.endDate === ""
-                                ) {
-                                  openNotificationWithIcon(
-                                    "error",
-                                    "Lỗi",
-                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
-                                  );
-                                  return;
-                                }
-                                setMaMLTDiep200((prev) => ({
-                                  ...prev,
-                                  logigo: value,
-                                }));
-                                handleChangeMLTD_200(
-                                  time.startDate,
-                                  time.endDate,
-                                  value,
-                                  "logigo"
-                                );
-                              }}
-                              options={optionMTLDiep.TD200}
-                            />
-                          )}
-
-                          {item?.value === "TD203_Thieu" && (
-                            <Select
-                              value={maMLTDiep203.logigo}
-                              onChange={(value) => {
-                                if (
-                                  time.startDate === "" ||
-                                  time.endDate === ""
-                                ) {
-                                  openNotificationWithIcon(
-                                    "error",
-                                    "Lỗi",
-                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
-                                  );
-                                  return;
-                                }
-                                setMaMLTDiep203((prev) => ({
-                                  ...prev,
-                                  logigo: value,
-                                }));
-                                handleChangeMLTD_203(
-                                  time.startDate,
-                                  time.endDate,
-                                  value,
-                                  "logigo"
-                                );
-                              }}
-                              options={optionMTLDiep.TD203}
-                            />
-                          )}
                         </div>
 
                         <div>
@@ -1088,97 +968,7 @@ const Compose1 = () => {
       },
     ];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [maMLTDiep200, maMLTDiep203, time]);
-
-  const handleChangeMLTD_200 = async (
-    startDate: any,
-    ennDate: any,
-    MLTDiep: any,
-    system: string
-  ) => {
-    try {
-      setLoading(true);
-      setData((prev: any) => {
-        return prev.map((item: any) => {
-          if (item.key === "200") {
-            return {
-              ...item,
-              ca2_thieu_du: {
-                ...item.ca2_thieu_du,
-                Check_TK_200: {
-                  length: 0,
-                  data: [],
-                },
-              },
-              logigo_thieu_du: {
-                ...item.logigo_thieu_du,
-                Check_TK_200: {
-                  length: 0,
-                  data: [],
-                },
-              },
-            };
-          }
-          return item;
-        });
-      });
-      if (system === "ca2") {
-        await getthongdiep200thieu_MTDiepCA2(startDate, ennDate, MLTDiep);
-      } else {
-        await getthongdiep200thieu_MTDiepLOGIGO(startDate, ennDate, MLTDiep);
-      }
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-
-      console.log(err);
-    }
-  };
-
-  const handleChangeMLTD_203 = async (
-    startDate: any,
-    ennDate: any,
-    MLTDiep: any,
-    system: string
-  ) => {
-    try {
-      setLoading(true);
-      setData((prev: any) => {
-        return prev.map((item: any) => {
-          if (item.key === "203") {
-            return {
-              ...item,
-              ca2_thieu_du: {
-                ...item.ca2_thieu_du,
-                TD203_Thieu: {
-                  length: 0,
-                  data: [],
-                },
-              },
-              logigo_thieu_du: {
-                ...item.logigo_thieu_du,
-                TD203_Thieu: {
-                  length: 0,
-                  data: [],
-                },
-              },
-            };
-          }
-          return item;
-        });
-      });
-      if (system === "ca2") {
-        await getthongdiep203thieu_MTDiepCA2(startDate, ennDate, MLTDiep);
-      } else {
-        await getthongdiep203thieu_MTDiepLOGIGO(startDate, ennDate, MLTDiep);
-      }
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-
-      console.log(err);
-    }
-  };
+  }, [time]);
 
   //Thông điệp 100
   const getDs100CA2 = async (startDate: any, endDate: any) => {
@@ -1298,17 +1088,21 @@ const Compose1 = () => {
     }
   };
 
-  const getDs100_thieu103CA2 = async (startDate: any, endDate: any) => {
+  const getthongdiep100thieu_MLTDiep_103CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
     try {
-      const response: any = await laydlbaocao100_Thieu103CA2(
+      const response: any = await Laythongdiep100thieu_MLTDiepCA2(
         startDate,
-        endDate
+        endDate,
+        "103"
       );
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu103Response"
-        ]["laydlbaocao100_Thieu103Result"]["diffgr:diffgram"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
@@ -1326,7 +1120,15 @@ const Compose1 = () => {
                   ...item.ca2_thieu_du,
                   Thieu_du_103: {
                     length: newResult?.length || 0,
-                    data: newResult || [],
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
                   },
                 },
               };
@@ -1339,90 +1141,123 @@ const Compose1 = () => {
       openNotificationWithIcon(
         "error",
         "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu103CA2"
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_103_CA2"
       );
     }
   };
 
-  const getDs100_thieu102or103CA2 = async (startDate: any, endDate: any) => {
-    try {
-      const response: any = await laydlbaocao100_Thieu102or103CA2(
-        startDate,
-        endDate
-      );
-      const dataJson = convertXmlToJson(response);
-      const DocumentElement =
-        dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu102or103Response"
-        ]["laydlbaocao100_Thieu102or103Result"]["diffgr:diffgram"][
-          "DocumentElement"
-        ];
-
-      setData((prev: any) => {
-        return prev.map((item: any) => {
-          if (item.key === "100") {
-            return {
-              ...item,
-              ca2_thieu_du: {
-                ...item.ca2_thieu_du,
-                Thieu_du_102_103: {
-                  length: DocumentElement?.DS?.length || 0,
-                  data: DocumentElement?.DS || [],
-                },
-              },
-            };
-          }
-          return item;
-        });
-      });
-    } catch (err) {
-      openNotificationWithIcon(
-        "error",
-        "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu102or103CA2"
-      );
-    }
-  };
-
-  const getDs100_thieu102or103or999CA2 = async (
+  const getthongdiep100thieu_MLTDiep_102CA2 = async (
     startDate: any,
     endDate: any
   ) => {
     try {
-      const response: any = await laydlbaocao100_Thieu102or103or999CA2(
+      const response: any = await Laythongdiep100thieu_MLTDiepCA2(
         startDate,
-        endDate
+        endDate,
+        "102"
       );
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu102or103or999Response"
-        ]["laydlbaocao100_Thieu102or103or999Result"]["diffgr:diffgram"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
-      setData((prev: any) => {
-        return prev.map((item: any) => {
-          if (item.key === "100") {
-            return {
-              ...item,
-              ca2_thieu_du: {
-                ...item.ca2_thieu_du,
-                Thieu_du_102_103_999: {
-                  length: DocumentElement?.DS?.length || 0,
-                  data: DocumentElement?.DS || [],
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "100") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  Thieu_du_102_103: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
                 },
-              },
-            };
-          }
-          return item;
+              };
+            }
+            return item;
+          });
         });
-      });
+      }
     } catch (err) {
       openNotificationWithIcon(
         "error",
         "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu102or103or999CA2"
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_102_CA2"
+      );
+    }
+  };
+
+  const getthongdiep100thieu_MLTDiep_999CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep100thieu_MLTDiepCA2(
+        startDate,
+        endDate,
+        "999"
+      );
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "100") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  Thieu_du_102_103_999: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_999_CA2"
       );
     }
   };
@@ -1548,17 +1383,21 @@ const Compose1 = () => {
     }
   };
 
-  const getDs100_thieu103LOGIGO = async (startDate: any, endDate: any) => {
+  const getthongdiep100thieu_MLTDiep_103LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
     try {
-      const response: any = await laydlbaocao100_Thieu103LOGIGO(
+      const response: any = await Laythongdiep100thieu_MLTDiepLOGIGO(
         startDate,
-        endDate
+        endDate,
+        "103"
       );
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu103Response"
-        ]["laydlbaocao100_Thieu103Result"]["diffgr:diffgram"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
@@ -1579,8 +1418,10 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
                         };
                       }) || [],
                   },
@@ -1595,22 +1436,26 @@ const Compose1 = () => {
       openNotificationWithIcon(
         "error",
         "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu103LOGIGO"
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_103_LOGIGO"
       );
     }
   };
 
-  const getDs100_thieu102or103LOGIGO = async (startDate: any, endDate: any) => {
+  const getthongdiep100thieu_MLTDiep_102LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
     try {
-      const response: any = await laydlbaocao100_Thieu102or103LOGIGO(
+      const response: any = await Laythongdiep100thieu_MLTDiepLOGIGO(
         startDate,
-        endDate
+        endDate,
+        "102"
       );
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu102or103Response"
-        ]["laydlbaocao100_Thieu102or103Result"]["diffgr:diffgram"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
@@ -1631,8 +1476,10 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
                         };
                       }) || [],
                   },
@@ -1647,29 +1494,28 @@ const Compose1 = () => {
       openNotificationWithIcon(
         "error",
         "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu102or103LOGIGO"
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_102_LOGIGO"
       );
     }
   };
 
-  const getDs100_thieu102or103or99LOGIGO = async (
+  const getthongdiep100thieu_MLTDiep_999LOGIGO = async (
     startDate: any,
     endDate: any
   ) => {
     try {
-      const response: any = await laydlbaocao100_Thieu102or103or999LOGIGO(
+      const response: any = await Laythongdiep100thieu_MLTDiepLOGIGO(
         startDate,
-        endDate
+        endDate,
+        "999"
       );
-
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu102or103or999Response"
-        ]["laydlbaocao100_Thieu102or103or999Result"]["diffgr:diffgram"][
+          "Laythongdiep100thieu_MLTDiepResponse"
+        ]["Laythongdiep100thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
-
       if (DocumentElement) {
         const newResult = Array.isArray(DocumentElement.DS)
           ? [...DocumentElement.DS]
@@ -1687,8 +1533,10 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
+                          MTDiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
                         };
                       }) || [],
                   },
@@ -1703,7 +1551,7 @@ const Compose1 = () => {
       openNotificationWithIcon(
         "error",
         "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu102or103or999LOGIGO"
+        "Có lỗi xảy ra với API Laythongdiep100thieu_MLTDiep_999_LOGIGO"
       );
     }
   };
@@ -2140,23 +1988,22 @@ const Compose1 = () => {
     }
   };
 
-  const getthongdiep200thieu_MTDiepCA2 = async (
+  const getthongdiep200thieu_MLTDiep_202CA2 = async (
     startDate: any,
-    endDate: any,
-    MLTDiep: any
+    endDate: any
   ) => {
     try {
-      const response: any = await Laythongdiep200thieu_MTDiepCA2(
+      const response: any = await Laythongdiep200thieu_MLTDiepCA2(
         startDate,
         endDate,
-        MLTDiep
+        "202"
       );
 
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "Laythongdiep200thieu_MTDiepResponse"
-        ]["Laythongdiep200thieu_MTDiepResult"]["diffgr:diffgram"][
+          "Laythongdiep200thieu_MLTDiepResponse"
+        ]["Laythongdiep200thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
@@ -2172,7 +2019,7 @@ const Compose1 = () => {
                 ...item,
                 ca2_thieu_du: {
                   ...item.ca2_thieu_du,
-                  Check_TK_200: {
+                  Check_TK_200_202: {
                     length: newResult?.length || 0,
                     data:
                       newResult?.map((e: any) => {
@@ -2200,23 +2047,22 @@ const Compose1 = () => {
     }
   };
 
-  const getthongdiep200thieu_MTDiepLOGIGO = async (
+  const getthongdiep200thieu_MLTDiep_202LOGIGO = async (
     startDate: any,
-    endDate: any,
-    MLTDiep: any
+    endDate: any
   ) => {
     try {
-      const response: any = await Laythongdiep200thieu_MTDiepLOGIGO(
+      const response: any = await Laythongdiep200thieu_MLTDiepLOGIGO(
         startDate,
         endDate,
-        MLTDiep
+        "202"
       );
 
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"][
-          "Laythongdiep200thieu_MTDiepResponse"
-        ]["Laythongdiep200thieu_MTDiepResult"]["diffgr:diffgram"][
+          "Laythongdiep200thieu_MLTDiepResponse"
+        ]["Laythongdiep200thieu_MLTDiepResult"]["diffgr:diffgram"][
           "DocumentElement"
         ];
 
@@ -2231,7 +2077,123 @@ const Compose1 = () => {
                 ...item,
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
-                  Check_TK_200: {
+                  Check_TK_200_202: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep200thieu_MTDiepLOGIGO"
+      );
+    }
+  };
+
+  const getthongdiep200thieu_MLTDiep_999CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep200thieu_MLTDiepCA2(
+        startDate,
+        endDate,
+        "999"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep200thieu_MLTDiepResponse"
+        ]["Laythongdiep200thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  Check_TK_200_999: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep200thieu_MTDiepCA2"
+      );
+    }
+  };
+
+  const getthongdiep200thieu_MLTDiep_999LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep200thieu_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "999"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep200thieu_MLTDiepResponse"
+        ]["Laythongdiep200thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  Check_TK_200_999: {
                     length: newResult?.length || 0,
                     data:
                       newResult?.map((e: any) => {
@@ -2259,7 +2221,6 @@ const Compose1 = () => {
   };
 
   //Thông điệp 203
-
   const getDs203CA2 = async (startDate: any, endDate: any) => {
     try {
       const response: any = await laydlbaocao203CA2(startDate, endDate);
@@ -3465,7 +3426,6 @@ const Compose1 = () => {
   };
 
   //Thông điệp 400
-
   const getDsthongdiep400CA2 = async (startDate: any, endDate: any) => {
     try {
       const response: any = await laydlbaocao400CA2(startDate, endDate);
@@ -3876,18 +3836,19 @@ const Compose1 = () => {
 
       await Promise.allSettled([
         //Thông điệp 100
-        getDs100CA2(startDate, endDate),
-        getDs100_thieu102CA2(startDate, endDate),
-        getDs100_thieu999CA2(startDate, endDate),
-        getDs100_thieu103CA2(startDate, endDate),
-        getDs100_thieu102or103CA2(startDate, endDate),
-        getDs100_thieu102or103or999CA2(startDate, endDate),
-        getDs100LOGIGO(startDate, endDate),
-        getDs100_thieu102LOGIGO(startDate, endDate),
-        getDs100_thieu999LOGIGO(startDate, endDate),
-        getDs100_thieu103LOGIGO(startDate, endDate),
-        getDs100_thieu102or103LOGIGO(startDate, endDate),
-        getDs100_thieu102or103or99LOGIGO(startDate, endDate),
+        // getDs100CA2(startDate, endDate),
+        // getDs100_thieu102CA2(startDate, endDate),
+        // getDs100_thieu999CA2(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_103CA2(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_102CA2(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_999CA2(startDate, endDate),
+
+        // getDs100LOGIGO(startDate, endDate),
+        // getDs100_thieu102LOGIGO(startDate, endDate),
+        // getDs100_thieu999LOGIGO(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_103LOGIGO(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_102LOGIGO(startDate, endDate),
+        getthongdiep100thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
         //Thông điệp 200
         getDs200CA2(startDate, endDate),
@@ -3899,63 +3860,61 @@ const Compose1 = () => {
         getthongdiep2024_200_Khongco202or204LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco999LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco999CA2(startDate, endDate),
-        getthongdiep200thieu_MTDiepCA2(startDate, endDate, maMLTDiep200.ca2),
-        getthongdiep200thieu_MTDiepLOGIGO(
-          startDate,
-          endDate,
-          maMLTDiep200.logigo
-        ),
+        getthongdiep200thieu_MLTDiep_202CA2(startDate, endDate),
+        getthongdiep200thieu_MLTDiep_202LOGIGO(startDate, endDate),
+        getthongdiep200thieu_MLTDiep_999CA2(startDate, endDate),
+        getthongdiep200thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-        //Thông điệp 203
-        getDs203LOGIGO(startDate, endDate),
-        getthongdiep203_ThuaLOGIGO(startDate, endDate),
-        getthongdiep203thieu_MTDiepLOGIGO(
-          startDate,
-          endDate,
-          maMLTDiep203.logigo
-        ),
+        // //Thông điệp 203
+        // getDs203LOGIGO(startDate, endDate),
+        // getthongdiep203_ThuaLOGIGO(startDate, endDate),
+        // getthongdiep203thieu_MTDiepLOGIGO(
+        //   startDate,
+        //   endDate,
+        //   maMLTDiep203.logigo
+        // ),
 
-        getDs203CA2(startDate, endDate),
-        getthongdiep203_ThuaCA2(startDate, endDate),
-        getthongdiep203thieu_MTDiepCA2(startDate, endDate, maMLTDiep203.ca2),
+        // getDs203CA2(startDate, endDate),
+        // getthongdiep203_ThuaCA2(startDate, endDate),
+        // getthongdiep203thieu_MTDiepCA2(startDate, endDate, maMLTDiep203.ca2),
 
-        //Thông điệp 206
-        getDs206LOGIGO(startDate, endDate),
-        getthongdiepMTT2024_tru1LOGIGO(startDate, endDate),
-        getthongdiepMTT2024_ThieuLOGIGO(startDate, endDate),
+        // //Thông điệp 206
+        // getDs206LOGIGO(startDate, endDate),
+        // getthongdiepMTT2024_tru1LOGIGO(startDate, endDate),
+        // getthongdiepMTT2024_ThieuLOGIGO(startDate, endDate),
 
-        getDs206CA2(startDate, endDate),
-        getthongdiepMTT2024_tru1CA2(startDate, endDate),
-        getthongdiepMTT2024_ThieuCA2(startDate, endDate),
+        // getDs206CA2(startDate, endDate),
+        // getthongdiepMTT2024_tru1CA2(startDate, endDate),
+        // getthongdiepMTT2024_ThieuCA2(startDate, endDate),
 
-        //Thông điệp 300
-        getDs300LOGIGO(startDate, endDate),
-        getDS300_Thieu301or204LOGIGO(startDate, endDate),
-        getDS300_Thieu999or204or301LOGIGO(startDate, endDate),
+        // //Thông điệp 300
+        // getDs300LOGIGO(startDate, endDate),
+        // getDS300_Thieu301or204LOGIGO(startDate, endDate),
+        // getDS300_Thieu999or204or301LOGIGO(startDate, endDate),
 
-        getDs300CA2(startDate, endDate),
-        getDS300_Thieu301or204CA2(startDate, endDate),
-        getDS300_Thieu999or204or301CA2(startDate, endDate),
+        // getDs300CA2(startDate, endDate),
+        // getDS300_Thieu301or204CA2(startDate, endDate),
+        // getDS300_Thieu999or204or301CA2(startDate, endDate),
 
-        //Thông điệp 303
-        getDsthongdiep2024_303(startDate, endDate),
-        getDSthongdiep2024_303_ThieuLOGIGO(startDate, endDate),
-        getDSthongdiep2024_303_tru1LOGIGO(startDate, endDate),
+        // //Thông điệp 303
+        // getDsthongdiep2024_303(startDate, endDate),
+        // getDSthongdiep2024_303_ThieuLOGIGO(startDate, endDate),
+        // getDSthongdiep2024_303_tru1LOGIGO(startDate, endDate),
 
-        getDsthongdiep2024_303CA2(startDate, endDate),
-        getDSthongdiep2024_303_ThieuCA2(startDate, endDate),
-        getDSthongdiep2024_303_tru1CA2(startDate, endDate),
+        // getDsthongdiep2024_303CA2(startDate, endDate),
+        // getDSthongdiep2024_303_ThieuCA2(startDate, endDate),
+        // getDSthongdiep2024_303_tru1CA2(startDate, endDate),
 
-        //Thông điệp 400
-        getDsthongdiep400(startDate, endDate),
-        getDSthongdiep400_204thieuLOGIGO(startDate, endDate),
-        getDSthongdiep400_999thieuLOGIGO(startDate, endDate),
-        getDSthongdiep400_204thuaLOGIGO(startDate, endDate),
+        // //Thông điệp 400
+        // getDsthongdiep400(startDate, endDate),
+        // getDSthongdiep400_204thieuLOGIGO(startDate, endDate),
+        // getDSthongdiep400_999thieuLOGIGO(startDate, endDate),
+        // getDSthongdiep400_204thuaLOGIGO(startDate, endDate),
 
-        getDsthongdiep400CA2(startDate, endDate),
-        getDSthongdiep400_204thieuCA2(startDate, endDate),
-        getDSthongdiep400_999thieuCA2(startDate, endDate),
-        getDSthongdiep400_204thuaCA2(startDate, endDate),
+        // getDsthongdiep400CA2(startDate, endDate),
+        // getDSthongdiep400_204thieuCA2(startDate, endDate),
+        // getDSthongdiep400_999thieuCA2(startDate, endDate),
+        // getDSthongdiep400_204thuaCA2(startDate, endDate),
       ]);
       setLoading(false);
     } catch (err) {
