@@ -25,8 +25,12 @@ export const THIEU_DU_203: {
     value: "TD203_Thua",
   },
   {
-    name: "Check TĐ thiếu 203:",
-    value: "TD203_Thieu",
+    name: "Check TĐ thiếu 203-204:",
+    value: "TD203_Thieu_204",
+  },
+  {
+    name: "Check TĐ thiếu 203-999:",
+    value: "TD203_Thieu_999",
   },
 ];
 
@@ -42,7 +46,11 @@ export type DataType203 = {
       length: number;
       data: any[];
     };
-    TD200_202_204: {
+    TD203_Thieu_204: {
+      length: number;
+      data: any[];
+    };
+    TD203_Thieu_999: {
       length: number;
       data: any[];
     };
@@ -57,7 +65,11 @@ export type DataType203 = {
       length: number;
       data: any[];
     };
-    TD200_202_204: {
+    TD203_Thieu_204: {
+      length: number;
+      data: any[];
+    };
+    TD203_Thieu_999: {
       length: number;
       data: any[];
     };

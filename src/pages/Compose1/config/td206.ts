@@ -25,8 +25,12 @@ export const THIEU_DU_206: {
     value: "TD206_1",
   },
   {
-    name: "TĐ thiếu 206 (không bao gồm TĐ -1):",
-    value: "TD206_Thieu",
+    name: "TĐ thiếu 204-206 (không bao gồm TĐ -1):",
+    value: "TD206_Thieu_204",
+  },
+  {
+    name: "TĐ thiếu 999-206 (không bao gồm TĐ -1):",
+    value: "TD206_Thieu_999",
   },
 ];
 
@@ -42,7 +46,11 @@ export type DataType206 = {
       length: number;
       data: any[];
     };
-    TD206_Thieu: {
+    TD206_Thieu_204: {
+      length: number;
+      data: any[];
+    };
+    TD206_Thieu_999: {
       length: number;
       data: any[];
     };
@@ -57,7 +65,11 @@ export type DataType206 = {
       length: number;
       data: any[];
     };
-    TD206_Thieu: {
+    TD206_Thieu_204: {
+      length: number;
+      data: any[];
+    };
+    TD206_Thieu_999: {
       length: number;
       data: any[];
     };

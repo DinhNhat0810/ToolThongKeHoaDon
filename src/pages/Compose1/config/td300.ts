@@ -26,12 +26,16 @@ export const THIEU_DU_300: {
   value: string;
 }[] = [
   {
-    name: "TĐ thiếu 301 hoặc 204:",
-    value: "TD300_301_204",
+    name: "Thông điệp 300 thiếu MLTDiep - 204:",
+    value: "TD300_Thieu_204",
   },
   {
-    name: "TĐ thiếu 999 hoặc 204 hoặc 301:",
-    value: "TD300_999_204_301",
+    name: "Thông điệp 300 thiếu MLTDiep - 301:",
+    value: "TD300_Thieu_301",
+  },
+  {
+    name: "Thông điệp 300 thiếu MLTDiep - 999:",
+    value: "TD300_Thieu_999",
   },
 ];
 
@@ -44,11 +48,15 @@ export type DataType300 = {
     Tong204: number;
   };
   ca2_thieu_du: {
-    TD300_301_204: {
+    TD300_Thieu_204: {
       length: number;
       data: any[];
     };
-    TD300_999_204_301: {
+    TD300_Thieu_301: {
+      length: number;
+      data: any[];
+    };
+    TD300_Thieu_999: {
       length: number;
       data: any[];
     };
@@ -60,11 +68,15 @@ export type DataType300 = {
     Tong204: number;
   };
   logigo_thieu_du: {
-    TD300_301_204: {
+    TD300_Thieu_204: {
       length: number;
       data: any[];
     };
-    TD300_999_204_301: {
+    TD300_Thieu_301: {
+      length: number;
+      data: any[];
+    };
+    TD300_Thieu_999: {
       length: number;
       data: any[];
     };

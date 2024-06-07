@@ -46,11 +46,11 @@ export const THIEU_DU_200: {
     value: "Check_TK_999",
   },
   {
-    name: "Check TĐ thiếu 200 (không bao gồm TĐ -1) 202:",
+    name: "Check TĐ thiếu 202-200 (không bao gồm TĐ -1):",
     value: "Check_TK_200_202",
   },
   {
-    name: "Check TĐ thiếu 200 (không bao gồm TĐ -1) 999:",
+    name: "Check TĐ thiếu 999-200 (không bao gồm TĐ -1):",
     value: "Check_TK_200_999",
   },
 ];

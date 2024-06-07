@@ -21,16 +21,12 @@ export const THIEU_DU_400: {
   value: string;
 }[] = [
   {
-    name: "TĐ thiếu 204-400:",
+    name: "Thông điệp 400 thiếu MLTDiep - 204",
     value: "TD400_204",
   },
   {
-    name: "TĐ thiếu 999-400:",
+    name: "Thông điệp 400 thiếu MLTDiep - 999:",
     value: "TD400_999",
-  },
-  {
-    name: "TĐ thừa 204-400:",
-    value: "TD400_204_Thua",
   },
 ];
 
@@ -50,10 +46,6 @@ export type DataType400 = {
       length: number;
       data: any[];
     };
-    TD400_204_Thua: {
-      length: number;
-      data: any[];
-    };
   };
   logigo_tksl: {
     Tong400: number;
@@ -66,10 +58,6 @@ export type DataType400 = {
       data: any[];
     };
     TD400_999: {
-      length: number;
-      data: any[];
-    };
-    TD400_204_Thua: {
       length: number;
       data: any[];
     };

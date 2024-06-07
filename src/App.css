@@ -21,3 +21,12 @@ th {
 .compose2 .ant-table-cell .ant-radio-inner {
   border-color: #001529 !important;
 }
+
+.compose2 .ant-upload-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.compose2 .ant-upload-wrapper > div:first-child {
+  margin-right: 10px;
+}

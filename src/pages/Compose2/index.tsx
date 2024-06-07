@@ -8,6 +8,7 @@ import {
   Select,
   Table,
   TableProps,
+  message,
   notification,
 } from "antd";
 import { useMemo, useRef, useState } from "react";
@@ -37,8 +38,17 @@ import {
   columnsModal3,
   columnsModal4,
 } from "./config/columnsModal";
+import UploadExcel from "../../components/UploadExcel";
 
-const CustomFields = ({ type, form }: { type: string; form: any }) => {
+const CustomFields = ({
+  type,
+  form,
+  onSetDataExelUpload,
+}: {
+  type: string;
+  form: any;
+  onSetDataExelUpload: (data: any) => void;
+}) => {
   switch (type) {
     case "TD_thongdiepthuetrave_theongay":
       return (
@@ -230,7 +240,7 @@ const CustomFields = ({ type, form }: { type: string; form: any }) => {
     case "TD_soAQuetFile_MTDTChieu":
       return (
         <>
-          <Form.Item
+          {/* <Form.Item
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
@@ -239,7 +249,13 @@ const CustomFields = ({ type, form }: { type: string; form: any }) => {
             name={"MTDTChieu"}
           >
             <Input placeholder="MTDTChieu" />
-          </Form.Item>
+          </Form.Item> */}
+
+          <UploadExcel
+            onSetDataExcelUpload={(data) => {
+              onSetDataExelUpload(data);
+            }}
+          />
 
           <Form.Item
             style={{
@@ -356,13 +372,14 @@ const Compose2 = () => {
   const [modelLabel, setModelLabel] = useState("");
   const [dataExel, setDataExel] = useState<any[]>([{}]);
   const [typeFilter, setTypeFilter] = useState<string>("ca2");
-
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([
     inititalData[0].key,
   ]);
   const [selectedRowSubKeys, setSelectedRowSubKeys] = useState<string>(
     inititalData[0].subKey
   );
+  const [dataExelUpload, setDataExelUpload] = useState<any[]>([]);
+
   const timeRef = useRef("");
 
   const onSelectChange = (newSelectedRowKeys: React.Key[], data: any) => {
@@ -1530,10 +1547,26 @@ const Compose2 = () => {
             setLoading(false);
             break;
           case "TD_soAQuetFile_MTDTChieu":
-            await getAQuetFile_MTDTChieuCA2(
-              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
-              values.MTDTChieu
-            );
+            for (const item of dataExelUpload) {
+              try {
+                await getAQuetFile_MTDTChieuCA2(
+                  dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                  item
+                );
+                openNotificationWithIcon(
+                  "success",
+                  "Thành công",
+                  "Đã xử lý xong" + item
+                );
+              } catch (err) {
+                openNotificationWithIcon(
+                  "error",
+                  "Lỗi",
+                  "Có lỗi xảy ra với" + item
+                );
+              }
+            }
+
             timeRef.current = dayjs(values.Thoigian).format(
               "YYYY/MM/DD 07:00:00"
             );
@@ -1667,7 +1700,11 @@ const Compose2 = () => {
             />
           </Form.Item>
 
-          <CustomFields type={selectedRowSubKeys} form={form} />
+          <CustomFields
+            type={selectedRowSubKeys}
+            form={form}
+            onSetDataExelUpload={(data) => setDataExelUpload(data)}
+          />
           <Form.Item
             style={{
               marginInlineEnd: 0,

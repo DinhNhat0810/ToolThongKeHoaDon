@@ -282,7 +282,7 @@ export const laydlbaocao203_ThuaCA2 = async (
   });
 };
 
-export const Laythongdiep203thieu_MTDiepCA2 = async (
+export const Laythongdiep203thieu_MLTDiepCA2 = async (
   startDate: string,
   endDate: string,
   MLTDiep: string
@@ -290,11 +290,11 @@ export const Laythongdiep203thieu_MTDiepCA2 = async (
   const soapEnvelope = `
   <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
-    <Laythongdiep203thieu_MTDiep xmlns="http://tempuri.org/">
+    <Laythongdiep203thieu_MLTDiep xmlns="http://tempuri.org/">
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
       <MLTDiep>${MLTDiep}</MLTDiep>
-    </Laythongdiep203thieu_MTDiep>
+    </Laythongdiep203thieu_MLTDiep>
   </soap12:Body>
 </soap12:Envelope>
       `;
@@ -359,17 +359,19 @@ export const laydlbaocaothongdiepMTT2024_tru1CA2 = async (
   });
 };
 
-export const laydlbaocaothongdiepMTT2024_ThieuCA2 = async (
+export const Laythongdiep206thieu_MLTDiepCA2 = async (
   startDate: string,
-  endDate: string
+  endDate: string,
+  MLTDiep: string
 ): AxiosPromise<ResponseType> => {
   const soapEnvelope = `
   <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
-    <laydlbaocaothongdiepMTT2024_Thieu  xmlns="http://tempuri.org/">
+    <Laythongdiep206thieu_MLTDiep  xmlns="http://tempuri.org/">
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
-    </laydlbaocaothongdiepMTT2024_Thieu>
+      <MLTDiep>${MLTDiep}</MLTDiep>
+    </Laythongdiep206thieu_MLTDiep>
   </soap12:Body>
 </soap12:Envelope>
       `;
@@ -409,42 +411,19 @@ export const laydlbaocao300CA2 = async (
   });
 };
 
-export const laydlbaocao300_Thieu301or204CA2 = async (
+export const Laythongdiep300thieu_MLTDiepCA2 = async (
   startDate: string,
-  endDate: string
+  endDate: string,
+  MLTDiep: string
 ): AxiosPromise<ResponseType> => {
   const soapEnvelope = `
   <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
-    <laydlbaocao300_Thieu301or204 xmlns="http://tempuri.org/">
+    <Laythongdiep300thieu_MLTDiep xmlns="http://tempuri.org/">
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
-    </laydlbaocao300_Thieu301or204>
-  </soap12:Body>
-</soap12:Envelope>
-      `;
-
-  return https({
-    baseURL: url,
-    method: "post",
-    data: soapEnvelope,
-    headers: {
-      "Content-Type": "application/soap+xml;charset=UTF-8",
-    },
-  });
-};
-
-export const laydlbaocao300_Thieu999or204or301CA2 = async (
-  startDate: string,
-  endDate: string
-): AxiosPromise<ResponseType> => {
-  const soapEnvelope = `
-  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-  <soap12:Body>
-    <laydlbaocao300_Thieu999or204or301 xmlns="http://tempuri.org/">
-      <tungay>${startDate}</tungay>
-      <denngay>${endDate}</denngay>
-    </laydlbaocao300_Thieu999or204or301>
+      <MLTDiep>${MLTDiep}</MLTDiep>
+    </Laythongdiep300thieu_MLTDiep>
   </soap12:Body>
 </soap12:Envelope>
       `;
@@ -559,67 +538,19 @@ export const laydlbaocao400CA2 = async (
   });
 };
 
-export const laydlbaocao400_204thieuCA2 = async (
+export const Laythongdiep400thieu_MLTDiepCA2 = async (
   startDate: string,
-  endDate: string
+  endDate: string,
+  MLTDiep: string
 ): AxiosPromise<ResponseType> => {
   const soapEnvelope = `
   <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
   <soap12:Body>
-    <laydlbaocao400_204thieu  xmlns="http://tempuri.org/">
+    <Laythongdiep400thieu_MLTDiep xmlns="http://tempuri.org/">
       <tungay>${startDate}</tungay>
       <denngay>${endDate}</denngay>
-    </laydlbaocao400_204thieu>
-  </soap12:Body>
-</soap12:Envelope>
-      `;
-
-  return https({
-    baseURL: url,
-    method: "post",
-    data: soapEnvelope,
-    headers: {
-      "Content-Type": "application/soap+xml;charset=UTF-8",
-    },
-  });
-};
-
-export const laydlbaocao400_999thieuCA2 = async (
-  startDate: string,
-  endDate: string
-): AxiosPromise<ResponseType> => {
-  const soapEnvelope = `
-  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-  <soap12:Body>
-    <laydlbaocao400_999thieu xmlns="http://tempuri.org/">
-      <tungay>${startDate}</tungay>
-      <denngay>${endDate}</denngay>
-    </laydlbaocao400_999thieu>
-  </soap12:Body>
-</soap12:Envelope>
-      `;
-
-  return https({
-    baseURL: url,
-    method: "post",
-    data: soapEnvelope,
-    headers: {
-      "Content-Type": "application/soap+xml;charset=UTF-8",
-    },
-  });
-};
-
-export const laydlbaocao400_204thuaCA2 = async (
-  startDate: string,
-  endDate: string
-): AxiosPromise<ResponseType> => {
-  const soapEnvelope = `
-  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
-  <soap12:Body>
-    <laydlbaocao400_204thua xmlns="http://tempuri.org/">
-      <tungay>${startDate}</tungay>
-      <denngay>${endDate}</denngay>
-    </laydlbaocao400_204thua>
+      <MLTDiep>${MLTDiep}</MLTDiep>
+    </Laythongdiep400thieu_MLTDiep>
   </soap12:Body>
 </soap12:Envelope>
       `;

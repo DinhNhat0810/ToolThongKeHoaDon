@@ -30,7 +30,7 @@ export const THIEU_DU_303: {
   },
   {
     name: "TĐ thiếu 301 hoặc 204 (không bao gồm TĐ -1):",
-    value: "TD203_301_204",
+    value: "TD303_301_204",
   },
   // {
   //   name: "TĐ thiếu 999 hoặc 204 hoặc 300 (không bao gồm TĐ -1):",
@@ -51,7 +51,7 @@ export type DataType303 = {
       length: number;
       data: any[];
     };
-    TD203_301_204: {
+    TD303_301_204: {
       length: number;
       data: any[];
     };
@@ -67,7 +67,7 @@ export type DataType303 = {
       length: number;
       data: any[];
     };
-    TD203_301_204: {
+    TD303_301_204: {
       length: number;
       data: any[];
     };
