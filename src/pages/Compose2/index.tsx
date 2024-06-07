@@ -5,6 +5,7 @@ import {
   Form,
   Input,
   Modal,
+  Select,
   Table,
   TableProps,
   notification,
@@ -354,6 +355,7 @@ const Compose2 = () => {
   const [columnsModal, setColumnsModal] = useState<any[]>([]);
   const [modelLabel, setModelLabel] = useState("");
   const [dataExel, setDataExel] = useState<any[]>([{}]);
+  const [typeFilter, setTypeFilter] = useState<string>("ca2");
 
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([
     inititalData[0].key,
@@ -596,7 +598,7 @@ const Compose2 = () => {
             (ele: any) => ele.value === record.subKey
           );
 
-          const dataTableModal = record["ca2"][item.value]?.data.map(
+          const dataTableModal = record["logigo"][item.value]?.data.map(
             (item: any, index: number) => {
               const newResult = {
                 ...item,
@@ -649,7 +651,7 @@ const Compose2 = () => {
                         color: "green",
                       }}
                       onClick={() => {
-                        handleSetDataToTable(item.value, "CA2");
+                        handleSetDataToTable(item.value, "LOGIGO");
                         setModalData(dataTableModal);
                         setDataExel(
                           dataTableModal?.map((item: any) => {
@@ -708,10 +710,10 @@ const Compose2 = () => {
                           })
                         );
                         setModelLabel(
-                          "CA2_" +
+                          "LOGIGO_" +
                             item.name +
                             " " +
-                            record["ca2"][item.value]?.length +
+                            record["logigo"][item.value]?.length +
                             `(${timeRef.current})`
                         );
                         handleOpen();
@@ -1314,6 +1316,8 @@ const Compose2 = () => {
           ? [...DocumentElement.DSKQ]
           : [...[DocumentElement.DSKQ]];
 
+        console.log(newResult);
+
         setData((prev: any) => {
           return prev.map((item: any) => {
             if (item.subKey === "TD_soAQuetFile_MTDTChieu") {
@@ -1351,109 +1355,269 @@ const Compose2 = () => {
     setLoading(true);
 
     try {
-      switch (type) {
-        case "TD_thongdiepthuetrave_theongay":
-          await getdlbaocao2024_thongdiepthuetraveCA2(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            values.MTDTChieu
-          );
-          await getdlbaocao2024_thongdiepthuetraveLOGIGO(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            values.MTDTChieu
-          );
-          setLoading(false);
-          timeRef.current =
-            dayjs(values.tungay).format("YYYY/MM/DD") +
-            "-" +
-            dayjs(new Date()).format("YYYY/MM/DD");
-
-          break;
-        case "TD_sothongdiepthuetrave":
-          if (values.denngay - values.tungay > 86400000) {
-            openNotificationWithIcon(
-              "error",
-              "Lỗi",
-              "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+      if (typeFilter === "all") {
+        switch (type) {
+          case "TD_thongdiepthuetrave_theongay":
+            await getdlbaocao2024_thongdiepthuetraveCA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              values.MTDTChieu
+            );
+            await getdlbaocao2024_thongdiepthuetraveLOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              values.MTDTChieu
             );
             setLoading(false);
-            return;
-          }
-          await getdlbaocao2024_sothongdiepthuetraveCA2(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            dayjs(values.denngay).format("YYYY-MM-DD"),
-            values.MLTDiepxet,
-            +values.SLThongdiepxet
-          );
-          await getdlbaocao2024_sothongdiepthuetraveLOGIGO(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            dayjs(values.denngay).format("YYYY-MM-DD"),
-            values.MLTDiepxet,
-            +values.SLThongdiepxet
-          );
-          setLoading(false);
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
 
-          timeRef.current =
-            dayjs(values.tungay).format("YYYY/MM/DD") +
-            "-" +
-            dayjs(values.denngay).format("YYYY/MM/DD");
-
-          break;
-        case "TD_sobaocaothongdiep2024_MTDTChieu":
-          await getdlbaocaothongdiep2024_MTDTChieuCA2(values.MTDTChieu);
-          await getdlbaocaothongdiep2024_MTDTChieuLOGIGO(values.MTDTChieu);
-          timeRef.current = dayjs(new Date()).format("YYYY/MM/DD");
-          setLoading(false);
-          break;
-        case "TD_sobaocaothongdiep2024":
-          if (values.denngay - values.tungay > 86400000) {
-            openNotificationWithIcon(
-              "error",
-              "Lỗi",
-              "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+            break;
+          case "TD_sothongdiepthuetrave":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
+            await getdlbaocao2024_sothongdiepthuetraveCA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              values.MLTDiepxet,
+              +values.SLThongdiepxet
+            );
+            await getdlbaocao2024_sothongdiepthuetraveLOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00"),
+              values.MLTDiepxet,
+              +values.SLThongdiepxet
             );
             setLoading(false);
-            return;
-          }
 
-          await getdlbaocaothongdiep2024CA2(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            dayjs(values.denngay).format("YYYY-MM-DD"),
-            values.MST,
-            values.KHMSHDon,
-            values.KHHDon,
-            values.SHDon,
-            +values.HDMTTien
-          );
-          await getdlbaocaothongdiep2024LOGIGO(
-            dayjs(values.tungay).format("YYYY-MM-DD"),
-            dayjs(values.denngay).format("YYYY-MM-DD"),
-            values.MST,
-            values.KHMSHDon,
-            values.KHHDon,
-            values.SHDon,
-            +values.HDMTTien
-          );
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
 
-          timeRef.current =
-            dayjs(values.tungay).format("YYYY/MM/DD") +
-            "-" +
-            dayjs(values.denngay).format("YYYY/MM/DD");
-          setLoading(false);
+            break;
+          case "TD_sobaocaothongdiep2024_MTDTChieu":
+            await getdlbaocaothongdiep2024_MTDTChieuCA2(values.MTDTChieu);
+            await getdlbaocaothongdiep2024_MTDTChieuLOGIGO(values.MTDTChieu);
+            timeRef.current = dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+            break;
+          case "TD_sobaocaothongdiep2024":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
 
-          break;
+            await getdlbaocaothongdiep2024CA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00"),
+              values.MST,
+              values.KHMSHDon,
+              values.KHHDon,
+              values.SHDon,
+              +values.HDMTTien
+            );
+            await getdlbaocaothongdiep2024LOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00 "),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00 "),
+              values.MST,
+              values.KHMSHDon,
+              values.KHHDon,
+              values.SHDon,
+              +values.HDMTTien
+            );
 
-        case "TD_soAQuetFile_MTDTChieu":
-          await getAQuetFile_MTDTChieuCA2(
-            dayjs(values.Thoigian).format("YYYY/MM/DD"),
-            values.MTDTChieu
-          );
-          await getAQuetFile_MTDTChieuLOGIGO(
-            dayjs(values.Thoigian).format("YYYY/MM/DD"),
-            values.MTDTChieu
-          );
-          timeRef.current = dayjs(values.Thoigian).format("YYYY/MM/DD");
-          setLoading(false);
-          break;
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+
+            break;
+
+          case "TD_soAQuetFile_MTDTChieu":
+            await getAQuetFile_MTDTChieuCA2(
+              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+              values.MTDTChieu
+            );
+            await getAQuetFile_MTDTChieuLOGIGO(
+              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+              values.MTDTChieu
+            );
+            timeRef.current = dayjs(values.Thoigian).format(
+              "YYYY/MM/DD 07:00:00"
+            );
+            setLoading(false);
+            break;
+        }
+      }
+
+      if (typeFilter === "ca2") {
+        switch (type) {
+          case "TD_thongdiepthuetrave_theongay":
+            await getdlbaocao2024_thongdiepthuetraveCA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              values.MTDTChieu
+            );
+            setLoading(false);
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
+            break;
+          case "TD_sothongdiepthuetrave":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
+            await getdlbaocao2024_sothongdiepthuetraveCA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              values.MLTDiepxet,
+              +values.SLThongdiepxet
+            );
+            setLoading(false);
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
+            break;
+          case "TD_sobaocaothongdiep2024_MTDTChieu":
+            await getdlbaocaothongdiep2024_MTDTChieuCA2(values.MTDTChieu);
+            timeRef.current = dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+            break;
+          case "TD_sobaocaothongdiep2024":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
+            await getdlbaocaothongdiep2024CA2(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00"),
+              values.MST,
+              values.KHMSHDon,
+              values.KHHDon,
+              values.SHDon,
+              +values.HDMTTien
+            );
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+            break;
+          case "TD_soAQuetFile_MTDTChieu":
+            await getAQuetFile_MTDTChieuCA2(
+              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+              values.MTDTChieu
+            );
+            timeRef.current = dayjs(values.Thoigian).format(
+              "YYYY/MM/DD 07:00:00"
+            );
+            setLoading(false);
+            break;
+        }
+      }
+
+      if (typeFilter === "logigo") {
+        switch (type) {
+          case "TD_thongdiepthuetrave_theongay":
+            await getdlbaocao2024_thongdiepthuetraveLOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              values.MTDTChieu
+            );
+            setLoading(false);
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
+            break;
+          case "TD_sothongdiepthuetrave":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
+            await getdlbaocao2024_sothongdiepthuetraveLOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00 07:00:00"),
+              values.MLTDiepxet,
+              +values.SLThongdiepxet
+            );
+            setLoading(false);
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
+            break;
+          case "TD_sobaocaothongdiep2024_MTDTChieu":
+            await getdlbaocaothongdiep2024_MTDTChieuLOGIGO(values.MTDTChieu);
+            timeRef.current = dayjs(new Date()).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+            break;
+          case "TD_sobaocaothongdiep2024":
+            if (values.denngay - values.tungay > 86400000) {
+              openNotificationWithIcon(
+                "error",
+                "Lỗi",
+                "Khoảng thời gian tìm kiếm không được quá 1 ngày"
+              );
+              setLoading(false);
+              return;
+            }
+            await getdlbaocaothongdiep2024LOGIGO(
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00"),
+              values.MST,
+              values.KHMSHDon,
+              values.KHHDon,
+              values.SHDon,
+              +values.HDMTTien
+            );
+            timeRef.current =
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
+              "-" +
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
+            setLoading(false);
+            break;
+          case "TD_soAQuetFile_MTDTChieu":
+            await getAQuetFile_MTDTChieuLOGIGO(
+              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+              values.MTDTChieu
+            );
+            timeRef.current = dayjs(values.Thoigian).format(
+              "YYYY/MM/DD 07:00:00"
+            );
+            setLoading(false);
+            break;
+        }
       }
     } catch (err) {
       console.log(err);
@@ -1461,8 +1625,12 @@ const Compose2 = () => {
     }
   };
 
+  const handleChangeTypeFilter = (value: string) => {
+    setTypeFilter(value);
+  };
+
   return (
-    <div>
+    <div className="compose2">
       {contextHolder}
 
       <div>
@@ -1486,6 +1654,19 @@ const Compose2 = () => {
             handlFinish(values, selectedRowSubKeys);
           }}
         >
+          <Form.Item label="Hệ thống">
+            <Select
+              value={typeFilter}
+              onChange={handleChangeTypeFilter}
+              style={{ width: 120 }}
+              options={[
+                { value: "ca2", label: "CA2" },
+                { value: "logigo", label: "LOGIGO" },
+                { value: "all", label: "Cả hai" },
+              ]}
+            />
+          </Form.Item>
+
           <CustomFields type={selectedRowSubKeys} form={form} />
           <Form.Item
             style={{
@@ -1512,6 +1693,8 @@ const Compose2 = () => {
               headerBg: "#001529d4",
               headerColor: "#fff",
               controlItemBgHover: "#fff",
+              borderColor: "#000000ab",
+              headerBorderRadius: 0,
             },
           },
         }}

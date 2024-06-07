@@ -6,6 +6,7 @@ import {
   Button,
   notification,
   ConfigProvider,
+  Select,
 } from "antd";
 import { useMemo, useRef, useState } from "react";
 import {
@@ -89,6 +90,18 @@ import {
   columnsModal6,
   columnsModal7,
 } from "./config/columnsModal";
+
+const optionMTLDiep = {
+  TD200: [
+    { value: "202", label: "202" },
+    { value: "999", label: "999" },
+  ],
+
+  TD203: [
+    { value: "202", label: "204" },
+    { value: "999", label: "999" },
+  ],
+};
 
 type CA2_TKTDType = {
   [key: string]: { name: string; value: string }[];
@@ -422,6 +435,18 @@ const Compose1 = () => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
   const [columnsModal, setColumnsModal] = useState<any[]>([]);
+  const [time, setTime] = useState<any>({
+    startDate: "",
+    endDate: "",
+  });
+  const [maMLTDiep200, setMaMLTDiep200] = useState({
+    ca2: optionMTLDiep.TD200[0].value,
+    logigo: optionMTLDiep.TD200[0].value,
+  });
+  const [maMLTDiep203, setMaMLTDiep203] = useState({
+    ca2: optionMTLDiep.TD203[0].value,
+    logigo: optionMTLDiep.TD203[0].value,
+  });
 
   const timeRef = useRef("");
 
@@ -433,6 +458,7 @@ const Compose1 = () => {
     api[type]({
       message: message,
       description: description,
+      duration: 0,
     });
   };
 
@@ -638,7 +664,7 @@ const Compose1 = () => {
                         item.value as keyof typeof record.ca2_thieu_du
                       ];
 
-                    const dataTableModal = detail?.data?.map(
+                    const dataTableModal = Array.from(detail?.data)?.map(
                       (item: any, index: number) => {
                         return {
                           ...item,
@@ -659,7 +685,78 @@ const Compose1 = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <span>{item?.name}</span>
+                        <div
+                          style={{
+                            flex: 1,
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <span>{item?.name}</span>
+                          {item?.value === "Check_TK_200" && (
+                            <Select
+                              value={maMLTDiep200.ca2}
+                              onChange={(value) => {
+                                if (
+                                  time.startDate === "" ||
+                                  time.endDate === ""
+                                ) {
+                                  openNotificationWithIcon(
+                                    "error",
+                                    "Lỗi",
+                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
+                                  );
+                                  return;
+                                }
+
+                                setMaMLTDiep200((prev) => ({
+                                  ...prev,
+                                  ca2: value,
+                                }));
+                                handleChangeMLTD_200(
+                                  time.startDate,
+                                  time.endDate,
+                                  value,
+                                  "ca2"
+                                );
+                              }}
+                              options={[
+                                { value: "202", label: "202" },
+                                { value: "999", label: "999" },
+                              ]}
+                            />
+                          )}
+
+                          {item?.value === "TD203_Thieu" && (
+                            <Select
+                              value={maMLTDiep203.ca2}
+                              onChange={(value) => {
+                                if (
+                                  time.startDate === "" ||
+                                  time.endDate === ""
+                                ) {
+                                  openNotificationWithIcon(
+                                    "error",
+                                    "Lỗi",
+                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
+                                  );
+                                  return;
+                                }
+                                setMaMLTDiep203((prev) => ({
+                                  ...prev,
+                                  ca2: value,
+                                }));
+                                handleChangeMLTD_203(
+                                  time.startDate,
+                                  time.endDate,
+                                  value,
+                                  "ca2"
+                                );
+                              }}
+                              options={optionMTLDiep.TD203}
+                            />
+                          )}
+                        </div>
                         <div>
                           <span
                             style={{
@@ -672,6 +769,7 @@ const Compose1 = () => {
                           >
                             {detail?.length}
                           </span>
+
                           {detail?.length > 0 ? (
                             <EyeOutlined
                               style={{
@@ -806,7 +904,7 @@ const Compose1 = () => {
                         item.value as keyof typeof record.logigo_thieu_du
                       ];
 
-                    const dataTableModal = detail?.data.map(
+                    const dataTableModal = Array.from(detail?.data).map(
                       (item: any, index: number) => {
                         return {
                           ...item,
@@ -827,7 +925,75 @@ const Compose1 = () => {
                           justifyContent: "space-between",
                         }}
                       >
-                        <span>{item?.name}</span>
+                        <div
+                          style={{
+                            flex: 1,
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <span>{item?.name}</span>
+                          {item?.value === "Check_TK_200" && (
+                            <Select
+                              value={maMLTDiep200.logigo}
+                              onChange={(value) => {
+                                if (
+                                  time.startDate === "" ||
+                                  time.endDate === ""
+                                ) {
+                                  openNotificationWithIcon(
+                                    "error",
+                                    "Lỗi",
+                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
+                                  );
+                                  return;
+                                }
+                                setMaMLTDiep200((prev) => ({
+                                  ...prev,
+                                  logigo: value,
+                                }));
+                                handleChangeMLTD_200(
+                                  time.startDate,
+                                  time.endDate,
+                                  value,
+                                  "logigo"
+                                );
+                              }}
+                              options={optionMTLDiep.TD200}
+                            />
+                          )}
+
+                          {item?.value === "TD203_Thieu" && (
+                            <Select
+                              value={maMLTDiep203.logigo}
+                              onChange={(value) => {
+                                if (
+                                  time.startDate === "" ||
+                                  time.endDate === ""
+                                ) {
+                                  openNotificationWithIcon(
+                                    "error",
+                                    "Lỗi",
+                                    "Vui lòng chọn thời gian trước khi chọn mã thông điệp"
+                                  );
+                                  return;
+                                }
+                                setMaMLTDiep203((prev) => ({
+                                  ...prev,
+                                  logigo: value,
+                                }));
+                                handleChangeMLTD_203(
+                                  time.startDate,
+                                  time.endDate,
+                                  value,
+                                  "logigo"
+                                );
+                              }}
+                              options={optionMTLDiep.TD203}
+                            />
+                          )}
+                        </div>
+
                         <div>
                           <span
                             style={{
@@ -921,7 +1087,98 @@ const Compose1 = () => {
         ],
       },
     ];
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [maMLTDiep200, maMLTDiep203, time]);
+
+  const handleChangeMLTD_200 = async (
+    startDate: any,
+    ennDate: any,
+    MLTDiep: any,
+    system: string
+  ) => {
+    try {
+      setLoading(true);
+      setData((prev: any) => {
+        return prev.map((item: any) => {
+          if (item.key === "200") {
+            return {
+              ...item,
+              ca2_thieu_du: {
+                ...item.ca2_thieu_du,
+                Check_TK_200: {
+                  length: 0,
+                  data: [],
+                },
+              },
+              logigo_thieu_du: {
+                ...item.logigo_thieu_du,
+                Check_TK_200: {
+                  length: 0,
+                  data: [],
+                },
+              },
+            };
+          }
+          return item;
+        });
+      });
+      if (system === "ca2") {
+        await getthongdiep200thieu_MTDiepCA2(startDate, ennDate, MLTDiep);
+      } else {
+        await getthongdiep200thieu_MTDiepLOGIGO(startDate, ennDate, MLTDiep);
+      }
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+
+      console.log(err);
+    }
+  };
+
+  const handleChangeMLTD_203 = async (
+    startDate: any,
+    ennDate: any,
+    MLTDiep: any,
+    system: string
+  ) => {
+    try {
+      setLoading(true);
+      setData((prev: any) => {
+        return prev.map((item: any) => {
+          if (item.key === "203") {
+            return {
+              ...item,
+              ca2_thieu_du: {
+                ...item.ca2_thieu_du,
+                TD203_Thieu: {
+                  length: 0,
+                  data: [],
+                },
+              },
+              logigo_thieu_du: {
+                ...item.logigo_thieu_du,
+                TD203_Thieu: {
+                  length: 0,
+                  data: [],
+                },
+              },
+            };
+          }
+          return item;
+        });
+      });
+      if (system === "ca2") {
+        await getthongdiep203thieu_MTDiepCA2(startDate, ennDate, MLTDiep);
+      } else {
+        await getthongdiep203thieu_MTDiepLOGIGO(startDate, ennDate, MLTDiep);
+      }
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+
+      console.log(err);
+    }
+  };
 
   //Thông điệp 100
   const getDs100CA2 = async (startDate: any, endDate: any) => {
@@ -987,16 +1244,7 @@ const Compose1 = () => {
                 ...item,
                 ca2_tksl: {
                   ...item.ca2_tksl,
-                  Thieu102: {
-                    length: newResult?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
-                        };
-                      }) || [],
-                  },
+                  Thieu102: newResult?.length || 0,
                 },
               };
             }
@@ -1240,16 +1488,7 @@ const Compose1 = () => {
                 ...item,
                 logigo_tksl: {
                   ...item.logigo_tksl,
-                  Thieu102: {
-                    length: newResult?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
-                        };
-                      }) || [],
-                  },
+                  Thieu102: newResult?.length,
                 },
               };
             }
@@ -1292,16 +1531,7 @@ const Compose1 = () => {
                 ...item,
                 logigo_tksl: {
                   ...item.logigo_tksl,
-                  Thieu999: {
-                    length: newResult?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.mtdiep,
-                          thoigian: e.thoigian,
-                        };
-                      }) || [],
-                  },
+                  Thieu999: newResult?.length,
                 },
               };
             }
@@ -1912,13 +2142,14 @@ const Compose1 = () => {
 
   const getthongdiep200thieu_MTDiepCA2 = async (
     startDate: any,
-    endDate: any
+    endDate: any,
+    MLTDiep: any
   ) => {
     try {
       const response: any = await Laythongdiep200thieu_MTDiepCA2(
         startDate,
         endDate,
-        "200"
+        MLTDiep
       );
 
       const dataJson = convertXmlToJson(response);
@@ -1971,13 +2202,14 @@ const Compose1 = () => {
 
   const getthongdiep200thieu_MTDiepLOGIGO = async (
     startDate: any,
-    endDate: any
+    endDate: any,
+    MLTDiep: any
   ) => {
     try {
       const response: any = await Laythongdiep200thieu_MTDiepLOGIGO(
         startDate,
         endDate,
-        "200"
+        MLTDiep
       );
 
       const dataJson = convertXmlToJson(response);
@@ -2115,13 +2347,14 @@ const Compose1 = () => {
 
   const getthongdiep203thieu_MTDiepCA2 = async (
     startDate: any,
-    endDate: any
+    endDate: any,
+    MLTDiep: any
   ) => {
     try {
       const response: any = await Laythongdiep203thieu_MTDiepCA2(
         startDate,
         endDate,
-        "203"
+        MLTDiep
       );
 
       const dataJson = convertXmlToJson(response);
@@ -2259,13 +2492,14 @@ const Compose1 = () => {
 
   const getthongdiep203thieu_MTDiepLOGIGO = async (
     startDate: any,
-    endDate: any
+    endDate: any,
+    MLTDiep: any
   ) => {
     try {
       const response: any = await Laythongdiep203thieu_MTDiepLOGIGO(
         startDate,
         endDate,
-        "203"
+        MLTDiep
       );
 
       const dataJson = convertXmlToJson(response);
@@ -3665,17 +3899,25 @@ const Compose1 = () => {
         getthongdiep2024_200_Khongco202or204LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco999LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco999CA2(startDate, endDate),
-        getthongdiep200thieu_MTDiepCA2(startDate, endDate),
-        getthongdiep200thieu_MTDiepLOGIGO(startDate, endDate),
+        getthongdiep200thieu_MTDiepCA2(startDate, endDate, maMLTDiep200.ca2),
+        getthongdiep200thieu_MTDiepLOGIGO(
+          startDate,
+          endDate,
+          maMLTDiep200.logigo
+        ),
 
         //Thông điệp 203
         getDs203LOGIGO(startDate, endDate),
         getthongdiep203_ThuaLOGIGO(startDate, endDate),
-        getthongdiep203thieu_MTDiepLOGIGO(startDate, endDate),
+        getthongdiep203thieu_MTDiepLOGIGO(
+          startDate,
+          endDate,
+          maMLTDiep203.logigo
+        ),
 
         getDs203CA2(startDate, endDate),
         getthongdiep203_ThuaCA2(startDate, endDate),
-        getthongdiep203thieu_MTDiepCA2(startDate, endDate),
+        getthongdiep203thieu_MTDiepCA2(startDate, endDate, maMLTDiep203.ca2),
 
         //Thông điệp 206
         getDs206LOGIGO(startDate, endDate),
@@ -3751,25 +3993,15 @@ const Compose1 = () => {
             }
 
             getData(
-              dayjs(values.tungay).format("YYYY-MM-DD"),
-              dayjs(values.denngay).format("YYYY-MM-DD")
+              dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
+              dayjs(values.denngay).format("YYYY-MM-DD 07:00:00")
             );
             timeRef.current =
-              dayjs(values.tungay).format("YYYY/MM/DD") +
+              dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
               "-" +
-              dayjs(values.denngay).format("YYYY/MM/DD");
+              dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
           }}
         >
-          {/* <Form.Item
-            style={{
-              marginInlineEnd: 0,
-              marginInlineStart: 16,
-            }}
-            label="Nhập MST"
-            name="MLTDiep"
-          >
-            <Input placeholder="Nhập MST" />
-          </Form.Item> */}
           <Form.Item
             style={{
               marginInlineEnd: 0,
@@ -3786,6 +4018,11 @@ const Compose1 = () => {
                 } else {
                   form.setFieldValue("denngay", null);
                 }
+
+                setTime({
+                  startDate: dayjs(e).format("YYYY-MM-DD 07:00:00"),
+                  endDate: dayjs(e).add(1, "day").format("YYYY-MM-DD 07:00:00"),
+                });
               }}
             />
           </Form.Item>
@@ -3824,8 +4061,8 @@ const Compose1 = () => {
               headerBg: "#001529d4",
               headerColor: "#fff",
               controlItemBgHover: "#fff",
-
-              /* here is your component tokens */
+              borderColor: "#000000ab",
+              headerBorderRadius: 0,
             },
           },
         }}

@@ -1,4 +1,5 @@
 import { TableProps, Tooltip } from "antd";
+import { useParams } from "react-router-dom";
 
 export const columnsModal0: TableProps<any>["columns"] = [
   {

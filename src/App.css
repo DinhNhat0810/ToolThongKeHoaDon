@@ -17,3 +17,7 @@ th {
   overflow: hidden;
   width: 400px;
 }
+
+.compose2 .ant-table-cell .ant-radio-inner {
+  border-color: #001529 !important;
+}
