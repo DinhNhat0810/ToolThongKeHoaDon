@@ -25,7 +25,35 @@ const props: UploadProps = {
   maxCount: 1,
   multiple: false,
   beforeUpload: () => false,
+  showUploadList: false,
 };
+
+function getObjectFromData(data: any) {
+  const result: any = {};
+
+  // Lấy tiêu đề cột từ hàng đầu tiên
+  const headers: any = data[0];
+
+  // Khởi tạo các mảng rỗng cho mỗi tiêu đề cột
+  headers.forEach((header: any) => {
+    result[header] = [];
+  });
+
+  // Tạo object với các cặp key-value
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    console.log(row, i);
+
+    headers.forEach((header: any, index: any) => {
+      console.log(header, row[index]);
+
+      result[header].push(row[index]);
+      console.log(result);
+    });
+  }
+
+  return result;
+}
 
 const UploadExcel = ({
   onSetDataExcelUpload,
@@ -52,9 +80,12 @@ const UploadExcel = ({
         const workbook = XLSX.read(data, { type: "array" });
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        const jsonData: any[][] = XLSX.utils.sheet_to_json(sheet, {
+          header: 1,
+          defval: "",
+        });
 
-        if (jsonData[0] !== "MTDTChieu") {
+        if (jsonData[0][0] !== "MTDTChieu") {
           messageApi.open({
             type: "error",
             content: "File không đúng định dạng",

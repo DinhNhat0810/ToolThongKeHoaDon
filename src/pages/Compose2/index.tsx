@@ -8,7 +8,6 @@ import {
   Select,
   Table,
   TableProps,
-  message,
   notification,
 } from "antd";
 import { useMemo, useRef, useState } from "react";
@@ -49,6 +48,9 @@ const CustomFields = ({
   form: any;
   onSetDataExelUpload: (data: any) => void;
 }) => {
+  const [typeTD_soAQuetFile_MTDTChieu, setTypeTD_soAQuetFile_MTDTChieu] =
+    useState<string>("text");
+
   switch (type) {
     case "TD_thongdiepthuetrave_theongay":
       return (
@@ -240,27 +242,44 @@ const CustomFields = ({
     case "TD_soAQuetFile_MTDTChieu":
       return (
         <>
-          {/* <Form.Item
+          <Select
             style={{
-              marginInlineEnd: 0,
-              marginInlineStart: 16,
+              marginInlineEnd: 16,
+              width: 100,
             }}
-            label="Mã thông điệp tham chiếu"
-            name={"MTDTChieu"}
-          >
-            <Input placeholder="MTDTChieu" />
-          </Form.Item> */}
-
-          <UploadExcel
-            onSetDataExcelUpload={(data) => {
-              onSetDataExelUpload(data);
+            value={typeTD_soAQuetFile_MTDTChieu}
+            options={[
+              { value: "text", label: "Nhập tay" },
+              { value: "file", label: "Tải file" },
+            ]}
+            onChange={(value) => {
+              onSetDataExelUpload([]);
+              setTypeTD_soAQuetFile_MTDTChieu(value);
             }}
           />
+
+          {typeTD_soAQuetFile_MTDTChieu === "text" ? (
+            <Form.Item
+              style={{
+                marginInlineEnd: 16,
+              }}
+              label="Mã thông điệp tham chiếu"
+              name={"MTDTChieu"}
+            >
+              <Input placeholder="MTDTChieu" />
+            </Form.Item>
+          ) : (
+            <UploadExcel
+              onSetDataExcelUpload={(data) => {
+                onSetDataExelUpload(data);
+              }}
+            />
+          )}
 
           <Form.Item
             style={{
               marginInlineEnd: 0,
-              marginInlineStart: 16,
+              marginInlineStart: 0,
             }}
             label="Thời gian"
             name={"Thoigian"}
@@ -401,6 +420,7 @@ const Compose2 = () => {
     api[type]({
       message: message,
       description: description,
+      duration: 0,
     });
   };
 
@@ -1304,10 +1324,11 @@ const Compose2 = () => {
           });
         });
       }
+      openNotificationWithIcon("success", "Thành công", MTDTChieu);
     } catch (err) {
       openNotificationWithIcon(
         "error",
-        "Lỗi",
+        "Lỗi" + MTDTChieu,
         "Có lỗi xảy ra với API AQuetFile_MTDTChieuCA2"
       );
     }
@@ -1368,7 +1389,7 @@ const Compose2 = () => {
     }
   };
 
-  const handlFinish = async (values: any, type: string) => {
+  const handleFinish = async (values: any, type: string) => {
     setLoading(true);
 
     try {
@@ -1436,7 +1457,6 @@ const Compose2 = () => {
               setLoading(false);
               return;
             }
-
             await getdlbaocaothongdiep2024CA2(
               dayjs(values.tungay).format("YYYY-MM-DD 07:00:00"),
               dayjs(values.denngay).format("YYYY-MM-DD 07:00:00"),
@@ -1455,24 +1475,37 @@ const Compose2 = () => {
               values.SHDon,
               +values.HDMTTien
             );
-
             timeRef.current =
               dayjs(values.tungay).format("YYYY/MM/DD 07:00:00") +
               "-" +
               dayjs(values.denngay).format("YYYY/MM/DD 07:00:00");
             setLoading(false);
-
             break;
-
           case "TD_soAQuetFile_MTDTChieu":
-            await getAQuetFile_MTDTChieuCA2(
-              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
-              values.MTDTChieu
-            );
-            await getAQuetFile_MTDTChieuLOGIGO(
-              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
-              values.MTDTChieu
-            );
+            if (values.MTDTChieu) {
+              await getAQuetFile_MTDTChieuCA2(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                values.MTDTChieu
+              );
+              await getAQuetFile_MTDTChieuLOGIGO(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                values.MTDTChieu
+              );
+              setLoading(false);
+              return;
+            }
+
+            for (const item of dataExelUpload) {
+              await getAQuetFile_MTDTChieuCA2(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                item
+              );
+              await getAQuetFile_MTDTChieuLOGIGO(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                item
+              );
+            }
+            setDataExelUpload([]);
             timeRef.current = dayjs(values.Thoigian).format(
               "YYYY/MM/DD 07:00:00"
             );
@@ -1547,26 +1580,23 @@ const Compose2 = () => {
             setLoading(false);
             break;
           case "TD_soAQuetFile_MTDTChieu":
-            for (const item of dataExelUpload) {
-              try {
-                await getAQuetFile_MTDTChieuCA2(
-                  dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
-                  item
-                );
-                openNotificationWithIcon(
-                  "success",
-                  "Thành công",
-                  "Đã xử lý xong" + item
-                );
-              } catch (err) {
-                openNotificationWithIcon(
-                  "error",
-                  "Lỗi",
-                  "Có lỗi xảy ra với" + item
-                );
-              }
+            if (values.MTDTChieu) {
+              await getAQuetFile_MTDTChieuCA2(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                values.MTDTChieu
+              );
+
+              setLoading(false);
+              return;
             }
 
+            for (const item of dataExelUpload) {
+              await getAQuetFile_MTDTChieuCA2(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                item
+              );
+            }
+            setDataExelUpload([]);
             timeRef.current = dayjs(values.Thoigian).format(
               "YYYY/MM/DD 07:00:00"
             );
@@ -1641,10 +1671,23 @@ const Compose2 = () => {
             setLoading(false);
             break;
           case "TD_soAQuetFile_MTDTChieu":
-            await getAQuetFile_MTDTChieuLOGIGO(
-              dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
-              values.MTDTChieu
-            );
+            if (values.MTDTChieu) {
+              await getAQuetFile_MTDTChieuLOGIGO(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                values.MTDTChieu
+              );
+
+              setLoading(false);
+              return;
+            }
+
+            for (const item of dataExelUpload) {
+              await getAQuetFile_MTDTChieuLOGIGO(
+                dayjs(values.Thoigian).format("YYYY/MM/DD 07:00:00"),
+                item
+              );
+            }
+            setDataExelUpload([]);
             timeRef.current = dayjs(values.Thoigian).format(
               "YYYY/MM/DD 07:00:00"
             );
@@ -1684,7 +1727,7 @@ const Compose2 = () => {
               return;
             }
 
-            handlFinish(values, selectedRowSubKeys);
+            handleFinish(values, selectedRowSubKeys);
           }}
         >
           <Form.Item label="Hệ thống">
@@ -1748,6 +1791,14 @@ const Compose2 = () => {
             type: "radio",
             ...rowSelection,
           }}
+          onRow={(record) => {
+            return {
+              onClick: () => {
+                setSelectedRowSubKeys(record.subKey);
+                setSelectedRowKeys([record.key]);
+              }, // click row
+            };
+          }}
         />
       </ConfigProvider>
 
@@ -1771,7 +1822,6 @@ const Compose2 = () => {
                 headerBg: "#001529d4",
                 headerColor: "#fff",
                 controlItemBgHover: "#fff",
-
                 /* here is your component tokens */
               },
             },

@@ -27,6 +27,7 @@ export const TKTBHT: {
 
 export type DataTypeTKTBHT = {
   subKey: string;
+  key: string;
   ca2: {
     thongdiepthuetrave_theongay: number;
     sothongdiepthuetrave: number;

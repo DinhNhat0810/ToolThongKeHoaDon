@@ -1498,7 +1498,13 @@ const Compose1 = () => {
   //Thông điệp 200
   const getDs200CA2 = async (startDate: any, endDate: any) => {
     try {
+      const data200_1: any = await getthongdiep2024_200_tru1CA2(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocao200CA2(startDate, endDate);
+
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
         dataJson["soap:Envelope"]["soap:Body"]["laydlbaocao200Response"][
@@ -1512,7 +1518,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong200: DocumentElement.DS["Tong200"],
+                Tong200: DocumentElement.DS["Tong200"] - data200_1,
                 Tong999: DocumentElement.DS["Tong999"],
                 Tong202: DocumentElement.DS["Tong202"],
                 Tong204: DocumentElement.DS["Tong204"],
@@ -1535,6 +1541,11 @@ const Compose1 = () => {
 
   const getDs200LOGIGO = async (startDate: any, endDate: any) => {
     try {
+      const data200_1: any = await getthongdiep2024_200_tru1LOGIGO(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocao200LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -1549,7 +1560,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong200: DocumentElement.DS["Tong200"],
+                Tong200: DocumentElement.DS["Tong200"] - data200_1,
                 Tong999: DocumentElement.DS["Tong999"],
                 Tong202: DocumentElement.DS["Tong202"],
                 Tong204: DocumentElement.DS["Tong204"],
@@ -1618,7 +1629,11 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+
+      return 0;
     } catch (err) {
       console.log(err);
 
@@ -1675,7 +1690,10 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+      return 0;
     } catch (err) {
       console.log(err);
 
@@ -2569,6 +2587,11 @@ const Compose1 = () => {
   //Thông điệp 206
   const getDs206LOGIGO = async (startDate: any, endDate: any) => {
     try {
+      const data206_1: any = await getthongdiepMTT2024_tru1LOGIGO(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocao206LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -2585,7 +2608,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong206: DocumentElement.DSKQ["Tong206"],
+                Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
                 Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
                 Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
               },
@@ -2607,6 +2630,11 @@ const Compose1 = () => {
 
   const getDs206CA2 = async (startDate: any, endDate: any) => {
     try {
+      const data206_1: any = await getthongdiepMTT2024_tru1CA2(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocao206CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -2623,7 +2651,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong206: DocumentElement.DSKQ["Tong206"],
+                Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
                 Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
                 Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
               },
@@ -2690,7 +2718,11 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+
+      return 0;
     } catch (err) {
       console.log(err);
 
@@ -2746,7 +2778,11 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+
+      return 0;
     } catch (err) {
       console.log(err);
 
@@ -3432,8 +3468,13 @@ const Compose1 = () => {
   };
 
   //Thông điệp 303
-  const getDsthongdiep2024_303 = async (startDate: any, endDate: any) => {
+  const getDsthongdiep2024_303LOGIGO = async (startDate: any, endDate: any) => {
     try {
+      const data303_1: any = await getDSthongdiep2024_303_tru1LOGIGO(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocaothongdiep2024_303LOGIGO(
         startDate,
         endDate
@@ -3453,7 +3494,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong303: DocumentElement.DSKQ["Tong303"],
+                Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
                 Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
                 Tongphanhoi301: DocumentElement.DSKQ["Tongphanhoi301"],
                 Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
@@ -3522,7 +3563,11 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -3589,6 +3634,11 @@ const Compose1 = () => {
 
   const getDsthongdiep2024_303CA2 = async (startDate: any, endDate: any) => {
     try {
+      const data303_1: any = await getDSthongdiep2024_303_tru1CA2(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocaothongdiep2024_303CA2(
         startDate,
         endDate
@@ -3608,7 +3658,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong303: DocumentElement.DSKQ["Tong303"],
+                Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
                 Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
                 Tongphanhoi301: DocumentElement.DSKQ["Tongphanhoi301"],
                 Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
@@ -3677,7 +3727,10 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
       }
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -4083,8 +4136,8 @@ const Compose1 = () => {
         getDs200CA2(startDate, endDate),
         getDs200LOGIGO(startDate, endDate),
 
-        getthongdiep2024_200_tru1CA2(startDate, endDate),
-        getthongdiep2024_200_tru1LOGIGO(startDate, endDate),
+        // getthongdiep2024_200_tru1CA2(startDate, endDate),
+        // getthongdiep2024_200_tru1LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco202or204CA2(startDate, endDate),
         getthongdiep2024_200_Khongco202or204LOGIGO(startDate, endDate),
         getthongdiep2024_200_Khongco999LOGIGO(startDate, endDate),
@@ -4107,12 +4160,12 @@ const Compose1 = () => {
 
         //Thông điệp 206
         getDs206LOGIGO(startDate, endDate),
-        getthongdiepMTT2024_tru1LOGIGO(startDate, endDate),
+        // getthongdiepMTT2024_tru1LOGIGO(startDate, endDate),
         getthongdiep206thieu_MLTDiep_204LOGIGO(startDate, endDate),
         getthongdiep206thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
         getDs206CA2(startDate, endDate),
-        getthongdiepMTT2024_tru1CA2(startDate, endDate),
+        // getthongdiepMTT2024_tru1CA2(startDate, endDate),
         getthongdiep206thieu_MLTDiep_204CA2(startDate, endDate),
         getthongdiep206thieu_MLTDiep_999CA2(startDate, endDate),
 
@@ -4128,13 +4181,13 @@ const Compose1 = () => {
         getthongdiep300thieu_MLTDiep_999CA2(startDate, endDate),
 
         //Thông điệp 303
-        getDsthongdiep2024_303(startDate, endDate),
+        getDsthongdiep2024_303LOGIGO(startDate, endDate),
         getDSthongdiep2024_303_ThieuLOGIGO(startDate, endDate),
-        getDSthongdiep2024_303_tru1LOGIGO(startDate, endDate),
+        // getDSthongdiep2024_303_tru1LOGIGO(startDate, endDate),
 
         getDsthongdiep2024_303CA2(startDate, endDate),
         getDSthongdiep2024_303_ThieuCA2(startDate, endDate),
-        getDSthongdiep2024_303_tru1CA2(startDate, endDate),
+        // getDSthongdiep2024_303_tru1CA2(startDate, endDate),
 
         // //Thông điệp 400
         getDsthongdiep400LOGIGO(startDate, endDate),
