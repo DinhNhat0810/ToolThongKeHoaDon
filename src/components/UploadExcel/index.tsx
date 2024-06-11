@@ -57,8 +57,10 @@ function getObjectFromData(data: any) {
 
 const UploadExcel = ({
   onSetDataExcelUpload,
+  title,
 }: {
   onSetDataExcelUpload: (data: any) => void;
+  title: string;
 }) => {
   const [messageApi, contextHolder] = message.useMessage();
 

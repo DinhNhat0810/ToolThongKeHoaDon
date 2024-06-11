@@ -142,6 +142,14 @@ export const columnsModal7: TableProps<any>["columns"] = [
   },
   {
     title: "MTDTChieu",
-    dataIndex: "MTDTChieu",
+    dataIndex: "MTDTchieu",
+  },
+];
+
+export const columnsModal8: TableProps<any>["columns"] = [
+  ...columnsModal7,
+  {
+    title: "Khóa phiên",
+    dataIndex: "khoaphien",
   },
 ];

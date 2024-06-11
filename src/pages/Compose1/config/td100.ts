@@ -19,20 +19,24 @@ export const TKTD_100: {
     value: "Tong103",
   },
 
-  {
-    name: "Thông điệp nhận thiếu 102:",
-    value: "Thieu102",
-  },
-  {
-    name: "Thông điệp nhận thiếu 999:",
-    value: "Thieu999",
-  },
+  // {
+  //   name: "Thông điệp nhận thiếu 102:",
+  //   value: "Thieu102",
+  // },
+  // {
+  //   name: "Thông điệp nhận thiếu 999:",
+  //   value: "Thieu999",
+  // },
 ];
 
 export const THIEU_DU_100: {
   name: string;
   value: string;
 }[] = [
+  {
+    name: "TĐ 100 trả về -1:",
+    value: "TD100_1",
+  },
   {
     name: "Thông điệp 100 thiếu MLTDiep-103:",
     value: "Thieu_du_103",
@@ -44,6 +48,10 @@ export const THIEU_DU_100: {
   {
     name: "Thông điệp 100 thiếu MLTDiep-999:",
     value: "Thieu_du_102_103_999",
+  },
+  {
+    name: "Lấy thông điệp thừa:",
+    value: "TD100_Lay_thua_100",
   },
 ];
 
@@ -70,6 +78,14 @@ export type DataType100 = {
       length: number;
       data: any[];
     };
+    TD100_Lay_thua_100: {
+      length: number;
+      data: any[];
+    };
+    TD100_1: {
+      length: number;
+      data: any[];
+    };
   };
   logigo_tksl: {
     Tong100: number;
@@ -92,5 +108,76 @@ export type DataType100 = {
       length: number;
       data: any[];
     };
+    TD100_Lay_thua_100: {
+      length: number;
+      data: any[];
+    };
+    TD100_1: {
+      length: number;
+      data: any[];
+    };
   };
+};
+
+export const initialData100: any = {
+  ca2_tksl: {
+    Tong100: 0,
+    Tong102: 0,
+    Tong103: 0,
+    Tong999: 0,
+    Thieu102: 0,
+    Thieu999: 0,
+  },
+  ca2_thieu_du: {
+    Thieu_du_103: {
+      length: 0,
+      data: [],
+    },
+    Thieu_du_102_103: {
+      length: 0,
+      data: [],
+    },
+    Thieu_du_102_103_999: {
+      length: 0,
+      data: [],
+    },
+    TD100_Lay_thua_100: {
+      length: 0,
+      data: [],
+    },
+    TD100_1: {
+      length: 0,
+      data: [],
+    },
+  },
+  logigo_tksl: {
+    Tong100: 0,
+    Tong102: 0,
+    Tong103: 0,
+    Tong999: 0,
+    Thieu102: 0,
+    Thieu999: 0,
+  },
+  logigo_thieu_du: {
+    Thieu_du_103: {
+      length: 0,
+      data: [],
+    },
+    Thieu_du_102_103: {
+      length: 0,
+      data: [],
+    },
+    Thieu_du_102_103_999: {
+      length: 0,
+      data: [],
+    },
+    TD100_Lay_thua_100: {
+      length: 0,
+      data: [],
+    },
+    TD100_1: {
+      length: 0,
+      data: [],
+    },
+  },
 };

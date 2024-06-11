@@ -59,6 +59,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Mã thông điệp tham chiếu"
             name={"MTDTChieu"}
@@ -70,6 +71,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Từ ngày"
             name={"tungay"}
@@ -85,6 +87,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Từ ngày"
             name={"tungay"}
@@ -104,6 +107,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Đến ngày"
             name={"denngay"}
@@ -115,6 +119,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Số lượng thông điệp xét"
             name={"SLThongdiepxet"}
@@ -126,6 +131,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Mã loại thông điệp xét"
             name={"MLTDiepxet"}
@@ -141,6 +147,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Mã thông điệp tham chiếu"
             name={"MTDTChieu"}
@@ -176,6 +183,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Đến ngày"
             name={"denngay"}
@@ -187,6 +195,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Mã số thuế"
             name={"MST"}
@@ -198,6 +207,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="KHMSHDon"
             name={"KHMSHDon"}
@@ -209,6 +219,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="KHHDon"
             name={"KHHDon"}
@@ -220,6 +231,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Số hóa đơn"
             name={"SHDon"}
@@ -231,6 +243,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 16,
+              marginBottom: 16,
             }}
             label="Hóa đơn máy tính tiền"
             name={"HDMTTien"}
@@ -245,6 +258,7 @@ const CustomFields = ({
           <Select
             style={{
               marginInlineEnd: 16,
+              marginBottom: 16,
               width: 100,
             }}
             value={typeTD_soAQuetFile_MTDTChieu}
@@ -262,6 +276,7 @@ const CustomFields = ({
             <Form.Item
               style={{
                 marginInlineEnd: 16,
+                marginBottom: 16,
               }}
               label="Mã thông điệp tham chiếu"
               name={"MTDTChieu"}
@@ -280,6 +295,7 @@ const CustomFields = ({
             style={{
               marginInlineEnd: 0,
               marginInlineStart: 0,
+              marginBottom: 16,
             }}
             label="Thời gian"
             name={"Thoigian"}
@@ -1709,7 +1725,25 @@ const Compose2 = () => {
     <div className="compose2">
       {contextHolder}
 
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Button
+          loading={loading}
+          type="primary"
+          onClick={() => {
+            form.resetFields();
+            setData(inititalData);
+          }}
+          style={{
+            marginTop: 16,
+          }}
+        >
+          Đặt lại
+        </Button>
         <Form
           form={form}
           layout="inline"

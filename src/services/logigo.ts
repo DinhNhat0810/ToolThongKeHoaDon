@@ -565,6 +565,62 @@ export const Laythongdiep400thieu_MLTDiepLOGIGO = async (
   });
 };
 
+export const LaythongdiepThua_MLTDiepLOGIGO = async (
+  startDate: string,
+  endDate: string,
+  MLTDiepGuithue: string,
+  MLTDiepthuePH: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <LaythongdiepThua_MLTDiep xmlns="http://tempuri.org/">
+      <tungay>${startDate}</tungay>
+      <denngay>${endDate}</denngay>
+      <MLTDiepGuithue>${MLTDiepGuithue}</MLTDiepGuithue>
+      <MLTDiepthuePH>${MLTDiepthuePH}</MLTDiepthuePH>
+    </LaythongdiepThua_MLTDiep>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
+export const LaythongdiepTru1_MLTDiepLOGIGO = async (
+  startDate: string,
+  endDate: string,
+  MLTDiep: string
+): AxiosPromise<ResponseType> => {
+  const soapEnvelope = `
+  <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+  <soap12:Body>
+    <LaythongdiepTru1_MLTDiep xmlns="http://tempuri.org/">
+      <tungay>${startDate}</tungay>
+      <denngay>${endDate}</denngay>
+      <MLTDiep>${MLTDiep}</MLTDiep>
+    </LaythongdiepTru1_MLTDiep>
+  </soap12:Body>
+</soap12:Envelope>
+      `;
+
+  return https({
+    baseURL: url,
+    method: "post",
+    data: soapEnvelope,
+    headers: {
+      "Content-Type": "application/soap+xml;charset=UTF-8",
+    },
+  });
+};
+
 //All
 export const laydlbaocao2024_thongdiepthuetraveLOGIGO = async (
   startDate: string,

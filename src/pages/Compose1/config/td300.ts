@@ -26,6 +26,10 @@ export const THIEU_DU_300: {
   value: string;
 }[] = [
   {
+    name: "TĐ 300 trả về -1:",
+    value: "TD300_1",
+  },
+  {
     name: "Thông điệp 300 thiếu MLTDiep - 204:",
     value: "TD300_Thieu_204",
   },
@@ -36,6 +40,10 @@ export const THIEU_DU_300: {
   {
     name: "Thông điệp 300 thiếu MLTDiep - 999:",
     value: "TD300_Thieu_999",
+  },
+  {
+    name: "Lấy thông điệp thừa:",
+    value: "TD300_Lay_thua_300",
   },
 ];
 
@@ -60,6 +68,14 @@ export type DataType300 = {
       length: number;
       data: any[];
     };
+    TD300_Lay_thua_300: {
+      length: number;
+      data: any[];
+    };
+    TD300_1: {
+      length: number;
+      data: any[];
+    };
   };
   logigo_tksl: {
     Tong300: number;
@@ -80,5 +96,72 @@ export type DataType300 = {
       length: number;
       data: any[];
     };
+    TD300_Lay_thua_300: {
+      length: number;
+      data: any[];
+    };
+    TD300_1: {
+      length: number;
+      data: any[];
+    };
   };
+};
+
+export const initialData300: any = {
+  ca2_tksl: {
+    Tong300: 0,
+    Tong999: 0,
+    Tong301: 0,
+    Tong204: 0,
+  },
+  ca2_thieu_du: {
+    TD300_Thieu_204: {
+      length: 0,
+      data: [],
+    },
+    TD300_Thieu_301: {
+      length: 0,
+      data: [],
+    },
+    TD300_Thieu_999: {
+      length: 0,
+      data: [],
+    },
+    TD300_Lay_thua_300: {
+      length: 0,
+      data: [],
+    },
+    TD300_1: {
+      length: 0,
+      data: [],
+    },
+  },
+  logigo_tksl: {
+    Tong300: 0,
+    Tong999: 0,
+    Tong301: 0,
+    Tong204: 0,
+  },
+  logigo_thieu_du: {
+    TD300_Thieu_204: {
+      length: 0,
+      data: [],
+    },
+    TD300_Thieu_301: {
+      length: 0,
+      data: [],
+    },
+    TD300_Thieu_999: {
+      length: 0,
+      data: [],
+    },
+    TD300_Lay_thua_300: {
+      length: 0,
+      data: [],
+    },
+    TD300_1: {
+      length: 0,
+      data: [],
+    },
+  },
 };
