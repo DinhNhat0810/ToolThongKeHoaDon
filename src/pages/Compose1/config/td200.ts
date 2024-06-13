@@ -45,6 +45,10 @@ export const THIEU_DU_200: {
     value: "Check_TK_999",
   },
   {
+    name: "TĐ trả về 202 và 204:",
+    value: "TD_trave_202_204",
+  },
+  {
     name: "Check TĐ thiếu 202-200 (không bao gồm TĐ -1):",
     value: "Check_TK_200_202",
   },
@@ -85,6 +89,10 @@ export type DataType200 = {
       length: number;
       data: any[];
     };
+    TD_trave_202_204: {
+      length: number;
+      data: any[];
+    };
     Check_TK_200_202: {
       length: number;
       data: any[];
@@ -120,6 +128,10 @@ export type DataType200 = {
       data: any[];
     };
     Check_TK_999: {
+      length: number;
+      data: any[];
+    };
+    TD_trave_202_204: {
       length: number;
       data: any[];
     };
@@ -164,6 +176,10 @@ export const initialData200: any = {
       length: 0,
       data: [],
     },
+    TD_trave_202_204: {
+      length: 0,
+      data: [],
+    },
     Check_TK_200_202: {
       length: 0,
       data: [],
@@ -199,6 +215,10 @@ export const initialData200: any = {
       data: [],
     },
     Check_TK_999: {
+      length: 0,
+      data: [],
+    },
+    TD_trave_202_204: {
       length: 0,
       data: [],
     },

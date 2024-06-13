@@ -11,6 +11,7 @@ import {
 import { useMemo, useRef, useState } from "react";
 import {
   Laythongdiep100thieu_MLTDiepLOGIGO,
+  Laythongdiep200_Traveca202va204LOGIGO,
   Laythongdiep200thieu_MLTDiepLOGIGO,
   Laythongdiep203thieu_MLTDiepLOGIGO,
   Laythongdiep206thieu_MLTDiepLOGIGO,
@@ -29,15 +30,14 @@ import {
   laydlbaocao400LOGIGO,
   laydlbaocaothongdiep2024_200_Khongco202or204LOGIGO,
   laydlbaocaothongdiep2024_200_Khongco999LOGIGO,
-  laydlbaocaothongdiep2024_200_tru1LOGIGO,
   laydlbaocaothongdiep2024_303LOGIGO,
   laydlbaocaothongdiep2024_303_ThieuLOGIGO,
   laydlbaocaothongdiep2024_303_tru1LOGIGO,
-  laydlbaocaothongdiepMTT2024_tru1LOGIGO,
 } from "../../services/logigo";
 import { convertXmlToJson } from "../../libs/common";
 import {
   Laythongdiep100thieu_MLTDiepCA2,
+  Laythongdiep200_Traveca202va204CA2,
   Laythongdiep200thieu_MLTDiepCA2,
   Laythongdiep203thieu_MLTDiepCA2,
   Laythongdiep206thieu_MLTDiepCA2,
@@ -56,11 +56,9 @@ import {
   laydlbaocao400CA2,
   laydlbaocaothongdiep2024_200_Khongco202or204CA2,
   laydlbaocaothongdiep2024_200_Khongco999CA2,
-  laydlbaocaothongdiep2024_200_tru1CA2,
   laydlbaocaothongdiep2024_303CA2,
   laydlbaocaothongdiep2024_303_ThieuCA2,
   laydlbaocaothongdiep2024_303_tru1CA2,
-  laydlbaocaothongdiepMTT2024_tru1CA2,
 } from "../../services/ca2";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
@@ -110,14 +108,11 @@ import {
   TKTD_400,
 } from "./config/td400";
 import {
-  columnsModal0,
   columnsModal1,
   columnsModal2,
   columnsModal3,
-  columnsModal4,
   columnsModal5,
   columnsModal6,
-  columnsModal7,
   columnsModal8,
 } from "./config/columnsModal";
 
@@ -140,6 +135,10 @@ const layThuaOptions: any = {
     {
       label: "202",
       value: "202",
+    },
+    {
+      label: "204",
+      value: "204",
     },
     {
       label: "999",
@@ -353,6 +352,7 @@ const Compose1 = () => {
       Check_TK_200_999: columnsModal6,
       TD200_202_204: columnsModal6,
       TD200_Lay_thua_200: columnsModal8,
+      TD_trave_202_204: columnsModal6,
 
       TD203_Thua: columnsModal3,
       TD203_Thieu_204: columnsModal6,
@@ -395,6 +395,7 @@ const Compose1 = () => {
       TD200_202_204: columnsModal1,
       Tongkhongco: columnsModal6,
       TD200_Lay_thua_200: columnsModal8,
+      TD_trave_202_204: columnsModal6,
 
       TD203_Thua: columnsModal3,
       TD203_301_204: columnsModal5,
@@ -843,6 +844,27 @@ const Compose1 = () => {
         endDate
       );
 
+      const data100_thua_999: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "100",
+        "999"
+      );
+
+      const data100_thua_102: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "100",
+        "102"
+      );
+
+      const data100_thua_103: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "100",
+        "103"
+      );
+
       const response: any = await laydlbaocao100CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -858,9 +880,9 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong100: DocumentElement.DS["Tong100"] - TD100_1,
-                Tong102: DocumentElement.DS["Tong102"],
-                Tong103: DocumentElement.DS["Tong103"],
-                Tong999: DocumentElement.DS["Tong999"],
+                Tong102: DocumentElement.DS["Tong102"] - data100_thua_102,
+                Tong103: DocumentElement.DS["Tong103"] - data100_thua_103,
+                Tong999: DocumentElement.DS["Tong999"] - data100_thua_999,
               },
             };
           }
@@ -885,6 +907,27 @@ const Compose1 = () => {
         endDate
       );
 
+      const data100_thua_999: any = await getthongdiepThua100_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "100",
+        "999"
+      );
+
+      const data100_thua_102: any = await getthongdiepThua100_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "100",
+        "102"
+      );
+
+      const data100_thua_103: any = await getthongdiepThua100_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "100",
+        "103"
+      );
+
       const response: any = await laydlbaocao100LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -900,9 +943,9 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong100: DocumentElement.DS["Tong100"] - TD100_1,
-                Tong102: DocumentElement.DS["Tong102"],
-                Tong103: DocumentElement.DS["Tong103"],
-                Tong999: DocumentElement.DS["Tong999"],
+                Tong102: DocumentElement.DS["Tong102"] - data100_thua_102,
+                Tong103: DocumentElement.DS["Tong103"] - data100_thua_103,
+                Tong999: DocumentElement.DS["Tong999"] - data100_thua_999,
               },
             };
           }
@@ -1482,7 +1525,28 @@ const Compose1 = () => {
             return item;
           });
         });
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "100") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD100_Lay_thua_100: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1542,7 +1606,28 @@ const Compose1 = () => {
             return item;
           });
         });
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "100") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD100_Lay_thua_100: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1602,7 +1687,28 @@ const Compose1 = () => {
             return item;
           });
         });
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD200_Lay_thua_200: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1662,7 +1768,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD200_Lay_thua_200: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1722,7 +1850,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "203") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD203_Lay_thua_203: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1782,7 +1932,27 @@ const Compose1 = () => {
             return item;
           });
         });
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "203") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD203_Lay_thua_203: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1842,7 +2012,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "206") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD206_Lay_thua_206: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1902,7 +2094,28 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "206") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD206_Lay_thua_206: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1962,7 +2175,28 @@ const Compose1 = () => {
             return item;
           });
         });
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "300") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD300_Lay_thua_300: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2022,7 +2256,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "300") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD300_Lay_thua_300: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2082,7 +2338,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD303_Lay_thua_303: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2142,7 +2420,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD303_Lay_thua_303: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2202,7 +2502,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "400") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD400_Lay_thua_400: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2262,7 +2584,29 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "400") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD400_Lay_thua_400: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
       }
+
+      return 0;
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -2276,6 +2620,37 @@ const Compose1 = () => {
   const getDs200CA2 = async (startDate: any, endDate: any) => {
     try {
       const data200_1: any = await getthongdiepTru1_MLTDiep200CA2(
+        startDate,
+        endDate
+      );
+
+      const data200_thua_999: any = await getthongdiepThua200_MLTDiepCA2(
+        startDate,
+        endDate,
+        "200",
+        "999"
+      );
+
+      const data200_thua_204: any = await getthongdiepThua200_MLTDiepCA2(
+        startDate,
+        endDate,
+        "200",
+        "204"
+      );
+
+      const data200_thua_202: any = await getthongdiepThua200_MLTDiepCA2(
+        startDate,
+        endDate,
+        "200",
+        "202"
+      );
+
+      const data200_thieu: any = await getthongdiep200thieu_MLTDiep_202CA2(
+        startDate,
+        endDate
+      );
+
+      const data202_204: any = await getthongdiep200_Traveca202va204CA2(
         startDate,
         endDate
       );
@@ -2295,10 +2670,19 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong200: DocumentElement.DS["Tong200"] - data200_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong202: DocumentElement.DS["Tong202"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong200:
+                  DocumentElement.DS["Tong200"] -
+                  data200_1 -
+                  data200_thieu.Tongkhongco,
+                Tong999:
+                  DocumentElement.DS["Tong999"] -
+                  data200_thieu.Tongkhongco -
+                  data200_thua_999,
+                Tong202: DocumentElement.DS["Tong202"] - data200_thua_202,
+                Tong204:
+                  DocumentElement.DS["Tong204"] -
+                  data202_204 -
+                  data200_thua_204,
                 Tongthieu: DocumentElement.DS["Tongthieu"],
                 Tongthua: DocumentElement.DS["Tongthua"],
               },
@@ -2323,6 +2707,37 @@ const Compose1 = () => {
         endDate
       );
 
+      const data200_thua_999: any = await getthongdiepThua200_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "200",
+        "999"
+      );
+
+      const data200_thua_204: any = await getthongdiepThua200_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "200",
+        "204"
+      );
+
+      const data200_thua_202: any = await getthongdiepThua200_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "200",
+        "202"
+      );
+
+      const data200_thieu: any = await getthongdiep200thieu_MLTDiep_202LOGIGO(
+        startDate,
+        endDate
+      );
+
+      const data202_204: any = await getthongdiep200_Traveca202va204LOGIGO(
+        startDate,
+        endDate
+      );
+
       const response: any = await laydlbaocao200LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -2337,10 +2752,19 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong200: DocumentElement.DS["Tong200"] - data200_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong202: DocumentElement.DS["Tong202"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong200:
+                  DocumentElement.DS["Tong200"] -
+                  data200_1 -
+                  data200_thieu.Tongkhongco,
+                Tong999:
+                  DocumentElement.DS["Tong999"] -
+                  data200_thieu.Tongkhongco -
+                  data200_thua_999,
+                Tong202: DocumentElement.DS["Tong202"] - data200_thua_202,
+                Tong204:
+                  DocumentElement.DS["Tong204"] -
+                  data202_204 -
+                  data200_thua_204,
                 Tongthieu: DocumentElement.DS["Tongthieu"],
                 Tongthua: DocumentElement.DS["Tongthua"],
               },
@@ -3247,6 +3671,166 @@ const Compose1 = () => {
     }
   };
 
+  const getthongdiep200_Traveca202va204LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep200_Traveca202va204LOGIGO(
+        startDate,
+        endDate
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep200_Traveca202va204Response"
+        ]["Laythongdiep200_Traveca202va204Result"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD_trave_202_204: {
+                    length: newResult?.length || 0,
+                    data: newResult?.map((e: any) => {
+                      return {
+                        mtdiep: e?.MTDiep,
+                        thoigian: e?.Thoigian,
+                        khoaphien: e?.khoaphien,
+                        IdMessage: e?.IdMessage,
+                      };
+                    }),
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD_trave_202_204: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+      return 0;
+    } catch (err) {
+      console.log(err);
+
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep200_Traveca202va204LOGIGO "
+      );
+    }
+  };
+
+  const getthongdiep200_Traveca202va204CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep200_Traveca202va204CA2(
+        startDate,
+        endDate
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep200_Traveca202va204Response"
+        ]["Laythongdiep200_Traveca202va204Result"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD_trave_202_204: {
+                    length: newResult?.length || 0,
+                    data: newResult?.map((e: any) => {
+                      return {
+                        mtdiep: e?.MTDiep,
+                        thoigian: e?.Thoigian,
+                        khoaphien: e?.khoaphien,
+                        IdMessage: e?.IdMessage,
+                      };
+                    }),
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+
+        return newResult?.length;
+      } else {
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "200") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD_trave_202_204: {
+                    length: 0,
+                    data: [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+      return 0;
+    } catch (err) {
+      console.log(err);
+
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep200_Traveca202va204CA2"
+      );
+    }
+  };
+
   //200
   const getthongdiep2024_200_Khongco202or204LOGIGO = async (
     startDate: any,
@@ -3527,6 +4111,22 @@ const Compose1 = () => {
           ? [...DocumentElement.DS]
           : [...[DocumentElement.DS]];
 
+        const tdKhongCo: any[] = [];
+
+        newResult?.forEach((e: any) => {
+          if (
+            e.khoaphien.split("_")[1][4] === "T" &&
+            e.khoaphien.split("_")[2] === "0"
+          ) {
+            tdKhongCo.push({
+              mtdiep: e.MTDiep,
+              thoigian: e.Thoigian,
+              khoaphien: e.khoaphien,
+              IdMessage: e.IdMessage,
+            });
+          }
+        });
+
         setData((prev: any) => {
           return prev.map((item: any) => {
             if (item.key === "200") {
@@ -3535,7 +4135,7 @@ const Compose1 = () => {
                 ca2_thieu_du: {
                   ...item.ca2_thieu_du,
                   Check_TK_200_202: {
-                    length: newResult?.length || 0,
+                    length: newResult?.length - tdKhongCo?.length || 0,
                     data:
                       newResult?.map((e: any) => {
                         return {
@@ -3546,13 +4146,26 @@ const Compose1 = () => {
                         };
                       }) || [],
                   },
+                  Tongkhongco: {
+                    length: tdKhongCo?.length || 0,
+                    data: tdKhongCo,
+                  },
                 },
               };
             }
             return item;
           });
         });
+
+        return {
+          Check_TK_200_202: newResult?.length,
+          Tongkhongco: tdKhongCo?.length,
+        };
       }
+      return {
+        Check_TK_200_202: 0,
+        Tongkhongco: 0,
+      };
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -3610,7 +4223,7 @@ const Compose1 = () => {
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
                   Check_TK_200_202: {
-                    length: newResult?.length || 0,
+                    length: newResult?.length - tdKhongCo?.length || 0,
                     data:
                       newResult?.map((e: any) => {
                         return {
@@ -3631,7 +4244,16 @@ const Compose1 = () => {
             return item;
           });
         });
+
+        return {
+          Check_TK_200_202: newResult?.length,
+          Tongkhongco: tdKhongCo?.length,
+        };
       }
+      return {
+        Check_TK_200_202: 0,
+        Tongkhongco: 0,
+      };
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -3764,6 +4386,20 @@ const Compose1 = () => {
         endDate
       );
 
+      const data203_thua_999: any = await getthongdiepThua203_MLTDiepCA2(
+        startDate,
+        endDate,
+        "203",
+        "999"
+      );
+
+      const data203_thua_204: any = await getthongdiepThua203_MLTDiepCA2(
+        startDate,
+        endDate,
+        "203",
+        "204"
+      );
+
       const response: any = await laydlbaocao203CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -3779,8 +4415,8 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong203: DocumentElement.DS["Tong203"] - TD203_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data203_thua_999,
+                Tong204: DocumentElement.DS["Tong204"] - data203_thua_204,
               },
             };
           }
@@ -3803,6 +4439,20 @@ const Compose1 = () => {
         endDate
       );
 
+      const data203_thua_999: any = await getthongdiepThua203_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "203",
+        "999"
+      );
+
+      const data203_thua_204: any = await getthongdiepThua203_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "203",
+        "204"
+      );
+
       const response: any = await laydlbaocao203LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -3818,8 +4468,8 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong203: DocumentElement.DS["Tong203"] - TD203_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data203_thua_999,
+                Tong204: DocumentElement.DS["Tong204"] - data203_thua_204,
               },
             };
           }
@@ -4181,6 +4831,20 @@ const Compose1 = () => {
         endDate
       );
 
+      const data206_thua_999: any = await getthongdiepThua206_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "206",
+        "999"
+      );
+
+      const data206_thua_204: any = await getthongdiepThua206_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "206",
+        "204"
+      );
+
       const response: any = await laydlbaocao206LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -4198,8 +4862,10 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
-                Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
-                Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
+                Tongphanhoi999:
+                  DocumentElement.DSKQ["Tongphanhoi999"] - data206_thua_999,
+                Tongphanhoi204:
+                  DocumentElement.DSKQ["Tongphanhoi204"] - data206_thua_204,
               },
             };
           }
@@ -4224,6 +4890,20 @@ const Compose1 = () => {
         endDate
       );
 
+      const data206_thua_999: any = await getthongdiepThua206_MLTDiepCA2(
+        startDate,
+        endDate,
+        "206",
+        "999"
+      );
+
+      const data206_thua_204: any = await getthongdiepThua206_MLTDiepCA2(
+        startDate,
+        endDate,
+        "206",
+        "204"
+      );
+
       const response: any = await laydlbaocao206CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -4241,8 +4921,10 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
-                Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
-                Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
+                Tongphanhoi999:
+                  DocumentElement.DSKQ["Tongphanhoi999"] - data206_thua_999,
+                Tongphanhoi204:
+                  DocumentElement.DSKQ["Tongphanhoi204"] - data206_thua_204,
               },
             };
           }
@@ -4511,6 +5193,28 @@ const Compose1 = () => {
         startDate,
         endDate
       );
+
+      const data300_thua_999: any = await getthongdiepThua300_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "300",
+        "999"
+      );
+
+      const data300_thua_301: any = await getthongdiepThua100_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "300",
+        "301"
+      );
+
+      const data300_thua_204: any = await getthongdiepThua100_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "300",
+        "204"
+      );
+
       const response: any = await laydlbaocao300LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -4526,9 +5230,9 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong300: DocumentElement.DS["Tong300"] - TD300_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong301: DocumentElement.DS["Tong301"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data300_thua_999,
+                Tong301: DocumentElement.DS["Tong301"] - data300_thua_301,
+                Tong204: DocumentElement.DS["Tong204"] - data300_thua_204,
               },
             };
           }
@@ -4553,6 +5257,27 @@ const Compose1 = () => {
         endDate
       );
 
+      const data300_thua_999: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "300",
+        "999"
+      );
+
+      const data300_thua_301: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "300",
+        "301"
+      );
+
+      const data300_thua_204: any = await getthongdiepThua100_MLTDiepCA2(
+        startDate,
+        endDate,
+        "300",
+        "204"
+      );
+
       const response: any = await laydlbaocao300CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -4568,9 +5293,9 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong300: DocumentElement.DS["Tong300"] - TD300_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong301: DocumentElement.DS["Tong301"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data300_thua_999,
+                Tong301: DocumentElement.DS["Tong301"] - data300_thua_301,
+                Tong204: DocumentElement.DS["Tong204"] - data300_thua_204,
               },
             };
           }
@@ -4950,6 +5675,27 @@ const Compose1 = () => {
         endDate
       );
 
+      const data303_thua_999: any = await getthongdiepThua303_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "303",
+        "999"
+      );
+
+      const data303_thua_204: any = await getthongdiepThua303_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "303",
+        "204"
+      );
+
+      const data303_thua_301: any = await getthongdiepThua303_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "303",
+        "301"
+      );
+
       const response: any = await laydlbaocaothongdiep2024_303LOGIGO(
         startDate,
         endDate
@@ -4970,9 +5716,12 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
-                Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
-                Tongphanhoi301: DocumentElement.DSKQ["Tongphanhoi301"],
-                Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
+                Tongphanhoi999:
+                  DocumentElement.DSKQ["Tongphanhoi999"] - data303_thua_999,
+                Tongphanhoi301:
+                  DocumentElement.DSKQ["Tongphanhoi301"] - data303_thua_301,
+                Tongphanhoi204:
+                  DocumentElement.DSKQ["Tongphanhoi204"] - data303_thua_204,
               },
             };
           }
@@ -5114,6 +5863,27 @@ const Compose1 = () => {
         endDate
       );
 
+      const data303_thua_999: any = await getthongdiepThua303_MLTDiepCA2(
+        startDate,
+        endDate,
+        "303",
+        "999"
+      );
+
+      const data303_thua_204: any = await getthongdiepThua303_MLTDiepCA2(
+        startDate,
+        endDate,
+        "303",
+        "204"
+      );
+
+      const data303_thua_301: any = await getthongdiepThua303_MLTDiepCA2(
+        startDate,
+        endDate,
+        "303",
+        "301"
+      );
+
       const response: any = await laydlbaocaothongdiep2024_303CA2(
         startDate,
         endDate
@@ -5134,9 +5904,12 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
-                Tongphanhoi999: DocumentElement.DSKQ["Tongphanhoi999"],
-                Tongphanhoi301: DocumentElement.DSKQ["Tongphanhoi301"],
-                Tongphanhoi204: DocumentElement.DSKQ["Tongphanhoi204"],
+                Tongphanhoi999:
+                  DocumentElement.DSKQ["Tongphanhoi999"] - data303_thua_999,
+                Tongphanhoi301:
+                  DocumentElement.DSKQ["Tongphanhoi301"] - data303_thua_301,
+                Tongphanhoi204:
+                  DocumentElement.DSKQ["Tongphanhoi204"] - data303_thua_204,
               },
             };
           }
@@ -5277,6 +6050,21 @@ const Compose1 = () => {
         startDate,
         endDate
       );
+
+      const data400_thua_999: any = await getthongdiepThua400_MLTDiepCA2(
+        startDate,
+        endDate,
+        "400",
+        "999"
+      );
+
+      const data400_thua_204: any = await getthongdiepThua400_MLTDiepCA2(
+        startDate,
+        endDate,
+        "400",
+        "204"
+      );
+
       const response: any = await laydlbaocao400CA2(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -5292,8 +6080,8 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong400: DocumentElement.DS["Tong400"] - TD400_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data400_thua_999,
+                Tong204: DocumentElement.DS["Tong204"] - data400_thua_204,
               },
             };
           }
@@ -5317,6 +6105,21 @@ const Compose1 = () => {
         startDate,
         endDate
       );
+
+      const data400_thua_999: any = await getthongdiepThua400_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "400",
+        "999"
+      );
+
+      const data400_thua_204: any = await getthongdiepThua400_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "400",
+        "204"
+      );
+
       const response: any = await laydlbaocao400LOGIGO(startDate, endDate);
       const dataJson = convertXmlToJson(response);
       const DocumentElement =
@@ -5332,8 +6135,8 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong400: DocumentElement.DS["Tong400"] - TD400_1,
-                Tong999: DocumentElement.DS["Tong999"],
-                Tong204: DocumentElement.DS["Tong204"],
+                Tong999: DocumentElement.DS["Tong999"] - data400_thua_999,
+                Tong204: DocumentElement.DS["Tong204"] - data400_thua_204,
               },
             };
           }
@@ -5586,8 +6389,8 @@ const Compose1 = () => {
   const getTD100 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
       //Thông điệp 100
-      getDs100CA2(startDate, endDate),
-      getDs100_thieu102CA2(startDate, endDate),
+      await getDs100CA2(startDate, endDate),
+      await getDs100_thieu102CA2(startDate, endDate),
       // getDs100_thieu999CA2(startDate, endDate),
       getthongdiep100thieu_MLTDiep_103CA2(startDate, endDate),
       getthongdiep100thieu_MLTDiep_102CA2(startDate, endDate),
@@ -5617,15 +6420,15 @@ const Compose1 = () => {
   const getTD200 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
       //Thông điệp 200
-      getDs200CA2(startDate, endDate),
-      getDs200LOGIGO(startDate, endDate),
+      await getDs200CA2(startDate, endDate),
+      await getDs200LOGIGO(startDate, endDate),
 
       getthongdiep2024_200_Khongco202or204CA2(startDate, endDate),
       getthongdiep2024_200_Khongco202or204LOGIGO(startDate, endDate),
       getthongdiep2024_200_Khongco999LOGIGO(startDate, endDate),
       getthongdiep2024_200_Khongco999CA2(startDate, endDate),
-      getthongdiep200thieu_MLTDiep_202CA2(startDate, endDate),
-      getthongdiep200thieu_MLTDiep_202LOGIGO(startDate, endDate),
+      // getthongdiep200thieu_MLTDiep_202CA2(startDate, endDate),
+      // getthongdiep200thieu_MLTDiep_202LOGIGO(startDate, endDate),
       getthongdiep200thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiep200thieu_MLTDiep_999LOGIGO(startDate, endDate),
       getthongdiepThua200_MLTDiepCA2(
@@ -5645,12 +6448,13 @@ const Compose1 = () => {
 
   const getTD203 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
-      getDs203LOGIGO(startDate, endDate),
+      await getDs203LOGIGO(startDate, endDate),
+      await getDs203CA2(startDate, endDate),
+
       getthongdiep203_ThuaLOGIGO(startDate, endDate),
       getthongdiep203thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep203thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs203CA2(startDate, endDate),
       getthongdiep203_ThuaCA2(startDate, endDate),
       getthongdiep203thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep203thieu_MLTDiep_999CA2(startDate, endDate),
@@ -5672,11 +6476,12 @@ const Compose1 = () => {
 
   const getTD206 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
-      getDs206LOGIGO(startDate, endDate),
+      await getDs206LOGIGO(startDate, endDate),
+      await getDs206CA2(startDate, endDate),
+
       getthongdiep206thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep206thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs206CA2(startDate, endDate),
       getthongdiep206thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep206thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiepThua206_MLTDiepCA2(
@@ -5696,12 +6501,13 @@ const Compose1 = () => {
 
   const getTD300 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
-      getDs300LOGIGO(startDate, endDate),
+      await getDs300LOGIGO(startDate, endDate),
+      await getDs300CA2(startDate, endDate),
+
       getthongdiep300thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep300thieu_MLTDiep_301LOGIGO(startDate, endDate),
       getthongdiep300thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs300CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_301CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_999CA2(startDate, endDate),
@@ -5723,10 +6529,10 @@ const Compose1 = () => {
 
   const getTD303 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
-      getDsthongdiep2024_303LOGIGO(startDate, endDate),
-      getDSthongdiep2024_303_ThieuLOGIGO(startDate, endDate),
+      await getDsthongdiep2024_303LOGIGO(startDate, endDate),
+      await getDsthongdiep2024_303CA2(startDate, endDate),
 
-      getDsthongdiep2024_303CA2(startDate, endDate),
+      getDSthongdiep2024_303_ThieuLOGIGO(startDate, endDate),
       getDSthongdiep2024_303_ThieuCA2(startDate, endDate),
       getthongdiepThua303_MLTDiepCA2(
         startDate,
@@ -5745,11 +6551,11 @@ const Compose1 = () => {
 
   const getTD400 = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
-      getDsthongdiep400LOGIGO(startDate, endDate),
+      await getDsthongdiep400LOGIGO(startDate, endDate),
+      await getDsthongdiep400CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep400thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDsthongdiep400CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiepThua400_MLTDiepCA2(
@@ -5770,8 +6576,8 @@ const Compose1 = () => {
   const getAllTd = async (startDate: any, endDate: any) => {
     await Promise.allSettled([
       //Thông điệp 100
-      getDs100CA2(startDate, endDate),
-      getDs100_thieu102CA2(startDate, endDate),
+      await getDs100CA2(startDate, endDate),
+      await getDs100_thieu102CA2(startDate, endDate),
       // getDs100_thieu999CA2(startDate, endDate),
       getthongdiep100thieu_MLTDiep_103CA2(startDate, endDate),
       getthongdiep100thieu_MLTDiep_102CA2(startDate, endDate),
@@ -5797,14 +6603,15 @@ const Compose1 = () => {
       ),
 
       // Thông điệp 200
-      getDs200CA2(startDate, endDate),
-      getDs200LOGIGO(startDate, endDate),
+      await getDs200CA2(startDate, endDate),
+      await getDs200LOGIGO(startDate, endDate),
+
       getthongdiep2024_200_Khongco202or204CA2(startDate, endDate),
       getthongdiep2024_200_Khongco202or204LOGIGO(startDate, endDate),
       getthongdiep2024_200_Khongco999LOGIGO(startDate, endDate),
       getthongdiep2024_200_Khongco999CA2(startDate, endDate),
-      getthongdiep200thieu_MLTDiep_202CA2(startDate, endDate),
-      getthongdiep200thieu_MLTDiep_202LOGIGO(startDate, endDate),
+      // getthongdiep200thieu_MLTDiep_202CA2(startDate, endDate),
+      // getthongdiep200thieu_MLTDiep_202LOGIGO(startDate, endDate),
       getthongdiep200thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiep200thieu_MLTDiep_999LOGIGO(startDate, endDate),
       getthongdiepThua200_MLTDiepCA2(
@@ -5821,12 +6628,13 @@ const Compose1 = () => {
       ),
 
       //Thông điệp 203
-      getDs203LOGIGO(startDate, endDate),
+      await getDs203LOGIGO(startDate, endDate),
+      await getDs203CA2(startDate, endDate),
+
       getthongdiep203_ThuaLOGIGO(startDate, endDate),
       getthongdiep203thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep203thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs203CA2(startDate, endDate),
       getthongdiep203_ThuaCA2(startDate, endDate),
       getthongdiep203thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep203thieu_MLTDiep_999CA2(startDate, endDate),
@@ -5845,11 +6653,12 @@ const Compose1 = () => {
       ),
 
       //Thông điệp 206
-      getDs206LOGIGO(startDate, endDate),
+      await getDs206LOGIGO(startDate, endDate),
+      await getDs206CA2(startDate, endDate),
+
       getthongdiep206thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep206thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs206CA2(startDate, endDate),
       getthongdiep206thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep206thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiepThua206_MLTDiepCA2(
@@ -5866,12 +6675,12 @@ const Compose1 = () => {
       ),
 
       //Thông điệp 300
-      getDs300LOGIGO(startDate, endDate),
+      await getDs300LOGIGO(startDate, endDate),
+      await getDs300CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep300thieu_MLTDiep_301LOGIGO(startDate, endDate),
       getthongdiep300thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDs300CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_301CA2(startDate, endDate),
       getthongdiep300thieu_MLTDiep_999CA2(startDate, endDate),
@@ -5910,11 +6719,11 @@ const Compose1 = () => {
       ),
 
       // //Thông điệp 400
-      getDsthongdiep400LOGIGO(startDate, endDate),
+      await getDsthongdiep400LOGIGO(startDate, endDate),
+      await getDsthongdiep400CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_204LOGIGO(startDate, endDate),
       getthongdiep400thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
-      getDsthongdiep400CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_204CA2(startDate, endDate),
       getthongdiep400thieu_MLTDiep_999CA2(startDate, endDate),
       getthongdiepThua400_MLTDiepCA2(
