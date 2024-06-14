@@ -64,6 +64,10 @@ export const THIEU_DU_200: {
     name: "Thông điệp không có số HĐ:",
     value: "Tongkhongco",
   },
+  {
+    name: "TĐ gửi nhiều lần không được cấp mã:",
+    value: "TD_guilai_khongduoccapma",
+  },
 ];
 
 export type DataType200 = {
@@ -109,6 +113,10 @@ export type DataType200 = {
       length: number;
       data: any[];
     };
+    TD_guilai_khongduoccapma: {
+      length: number;
+      data: any[];
+    };
   };
   logigo_tksl: {
     Tong200: number;
@@ -148,6 +156,10 @@ export type DataType200 = {
       data: any[];
     };
     Tongkhongco: {
+      length: number;
+      data: any[];
+    };
+    TD_guilai_khongduoccapma: {
       length: number;
       data: any[];
     };
@@ -196,6 +208,10 @@ export const initialData200: any = {
       length: 0,
       data: [],
     },
+    TD_guilai_khongduoccapma: {
+      length: 0,
+      data: [],
+    },
   },
   logigo_tksl: {
     Tong200: 0,
@@ -235,6 +251,10 @@ export const initialData200: any = {
       data: [],
     },
     Tongkhongco: {
+      length: 0,
+      data: [],
+    },
+    TD_guilai_khongduoccapma: {
       length: 0,
       data: [],
     },

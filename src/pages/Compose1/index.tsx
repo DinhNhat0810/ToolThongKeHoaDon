@@ -761,7 +761,6 @@ const Compose1 = () => {
                               }}
                               onClick={() => {
                                 handleSetDataToTable(item.value, "LOGIGO");
-
                                 setModalData(dataTableModal);
                                 setDataExel(
                                   dataTableModal?.map((item: any) => {
@@ -4200,6 +4199,7 @@ const Compose1 = () => {
           : [...[DocumentElement.DS]];
 
         const tdKhongCo: any[] = [];
+        const tdCo: any[] = [];
 
         newResult?.forEach((e: any) => {
           if (
@@ -4207,6 +4207,13 @@ const Compose1 = () => {
             e.khoaphien.split("_")[2] === "0"
           ) {
             tdKhongCo.push({
+              mtdiep: e.MTDiep,
+              thoigian: e.Thoigian,
+              khoaphien: e.khoaphien,
+              IdMessage: e.IdMessage,
+            });
+          } else {
+            tdCo.push({
               mtdiep: e.MTDiep,
               thoigian: e.Thoigian,
               khoaphien: e.khoaphien,
@@ -4224,15 +4231,7 @@ const Compose1 = () => {
                   ...item.logigo_thieu_du,
                   Check_TK_200_202: {
                     length: newResult?.length - tdKhongCo?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.MTDiep,
-                          thoigian: e.Thoigian,
-                          khoaphien: e.khoaphien,
-                          IdMessage: e.IdMessage,
-                        };
-                      }) || [],
+                    data: tdCo || [],
                   },
                   Tongkhongco: {
                     length: tdKhongCo?.length || 0,
