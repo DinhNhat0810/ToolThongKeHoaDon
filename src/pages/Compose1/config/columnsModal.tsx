@@ -153,3 +153,11 @@ export const columnsModal8: TableProps<any>["columns"] = [
     dataIndex: "khoaphien",
   },
 ];
+
+export const columnsModal9: TableProps<any>["columns"] = [
+  ...columnsModal1,
+  {
+    title: "MTDTChieu",
+    dataIndex: "MTDTChieu",
+  },
+];

@@ -16,6 +16,7 @@ import {
   Laythongdiep203thieu_MLTDiepLOGIGO,
   Laythongdiep206thieu_MLTDiepLOGIGO,
   Laythongdiep300thieu_MLTDiepLOGIGO,
+  Laythongdiep303thieu_MLTDiepLOGIGO,
   Laythongdiep400thieu_MLTDiepLOGIGO,
   LaythongdiepThua_MLTDiepLOGIGO,
   LaythongdiepTru1_MLTDiepLOGIGO,
@@ -42,6 +43,7 @@ import {
   Laythongdiep203thieu_MLTDiepCA2,
   Laythongdiep206thieu_MLTDiepCA2,
   Laythongdiep300thieu_MLTDiepCA2,
+  Laythongdiep303thieu_MLTDiepCA2,
   Laythongdiep400thieu_MLTDiepCA2,
   LaythongdiepThua_MLTDiepCA2,
   LaythongdiepTru1_MLTDiepCA2,
@@ -114,6 +116,7 @@ import {
   columnsModal5,
   columnsModal6,
   columnsModal8,
+  columnsModal9,
 } from "./config/columnsModal";
 
 const layThuaOptions: any = {
@@ -346,7 +349,7 @@ const Compose1 = () => {
       TD100_Lay_thua_100: columnsModal8,
       TD100_1: columnsModal1,
 
-      TD200_1: columnsModal1,
+      TD200_1: columnsModal9,
       Check_TK_999: columnsModal6,
       Check_TK_200_202: columnsModal6,
       Check_TK_200_999: columnsModal6,
@@ -375,6 +378,8 @@ const Compose1 = () => {
       TD303_1: columnsModal2,
       TD303_301_204: columnsModal5,
       TD303_Lay_thua_303: columnsModal8,
+      TD303_Thieu_303: columnsModal6,
+      TD303_Thieu_999: columnsModal6,
 
       TD400_999: columnsModal6,
       TD400_204: columnsModal6,
@@ -388,7 +393,7 @@ const Compose1 = () => {
       TD100_Lay_thua_100: columnsModal8,
       TD100_1: columnsModal1,
 
-      TD200_1: columnsModal1,
+      TD200_1: columnsModal9,
       Check_TK_999: columnsModal1,
       Check_TK_200_202: columnsModal6,
       Check_TK_200_999: columnsModal6,
@@ -418,6 +423,8 @@ const Compose1 = () => {
       TD303_1: columnsModal2,
       TD303_301_204: columnsModal5,
       TD303_Lay_thua_303: columnsModal8,
+      TD303_Thieu_303: columnsModal6,
+      TD303_Thieu_999: columnsModal6,
 
       TD400_204: columnsModal6,
       TD400_999: columnsModal6,
@@ -878,7 +885,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong100: DocumentElement.DS["Tong100"] - TD100_1,
+                Tong100: DocumentElement.DS["Tong100"],
                 Tong102: DocumentElement.DS["Tong102"] - data100_thua_102,
                 Tong103: DocumentElement.DS["Tong103"] - data100_thua_103,
                 Tong999: DocumentElement.DS["Tong999"] - data100_thua_999,
@@ -889,8 +896,6 @@ const Compose1 = () => {
         });
       });
     } catch (err) {
-      console.log(err);
-
       openNotificationWithIcon(
         "error",
         "Lỗi",
@@ -941,7 +946,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong100: DocumentElement.DS["Tong100"] - TD100_1,
+                Tong100: DocumentElement.DS["Tong100"],
                 Tong102: DocumentElement.DS["Tong102"] - data100_thua_102,
                 Tong103: DocumentElement.DS["Tong103"] - data100_thua_103,
                 Tong999: DocumentElement.DS["Tong999"] - data100_thua_999,
@@ -1046,42 +1051,42 @@ const Compose1 = () => {
     }
   };
 
-  const getDs100_thieu999CA2 = async (startDate: any, endDate: any) => {
-    try {
-      const response: any = await laydlbaocao100_Thieu999CA2(
-        startDate,
-        endDate
-      );
-      const dataJson = convertXmlToJson(response);
-      const DocumentElement =
-        dataJson["soap:Envelope"]["soap:Body"][
-          "laydlbaocao100_Thieu999Response"
-        ]["laydlbaocao100_Thieu999Result"]["diffgr:diffgram"][
-          "DocumentElement"
-        ];
+  // const getDs100_thieu999CA2 = async (startDate: any, endDate: any) => {
+  //   try {
+  //     const response: any = await laydlbaocao100_Thieu999CA2(
+  //       startDate,
+  //       endDate
+  //     );
+  //     const dataJson = convertXmlToJson(response);
+  //     const DocumentElement =
+  //       dataJson["soap:Envelope"]["soap:Body"][
+  //         "laydlbaocao100_Thieu999Response"
+  //       ]["laydlbaocao100_Thieu999Result"]["diffgr:diffgram"][
+  //         "DocumentElement"
+  //       ];
 
-      setData((prev: any) => {
-        return prev.map((item: any) => {
-          if (item.key === "100") {
-            return {
-              ...item,
-              ca2_tksl: {
-                ...item.ca2_tksl,
-                Thieu999: DocumentElement?.DS?.length || 0,
-              },
-            };
-          }
-          return item;
-        });
-      });
-    } catch (err) {
-      openNotificationWithIcon(
-        "error",
-        "Lỗi",
-        "Có lỗi xảy ra với API laydlbaocao100_Thieu999CA2"
-      );
-    }
-  };
+  //     setData((prev: any) => {
+  //       return prev.map((item: any) => {
+  //         if (item.key === "100") {
+  //           return {
+  //             ...item,
+  //             ca2_tksl: {
+  //               ...item.ca2_tksl,
+  //               Thieu999: DocumentElement?.DS?.length || 0,
+  //             },
+  //           };
+  //         }
+  //         return item;
+  //       });
+  //     });
+  //   } catch (err) {
+  //     openNotificationWithIcon(
+  //       "error",
+  //       "Lỗi",
+  //       "Có lỗi xảy ra với API laydlbaocao100_Thieu999CA2"
+  //     );
+  //   }
+  // };
 
   const getDs100_thieu999LOGIGO = async (startDate: any, endDate: any) => {
     try {
@@ -2670,12 +2675,11 @@ const Compose1 = () => {
               ca2_tksl: {
                 ...item.ca2_tksl,
                 Tong200:
-                  DocumentElement.DS["Tong200"] -
-                  data200_1 -
-                  data200_thieu.Tongkhongco,
+                  DocumentElement.DS["Tong200"] - data200_thieu?.Tongkhongco ||
+                  0,
                 Tong999:
                   DocumentElement.DS["Tong999"] -
-                  data200_thieu.Tongkhongco -
+                  (data200_thieu?.Tongkhongco || 0) -
                   data200_thua_999,
                 Tong202: DocumentElement.DS["Tong202"] - data200_thua_202,
                 Tong204:
@@ -2691,6 +2695,8 @@ const Compose1 = () => {
         });
       });
     } catch (err) {
+      console.log(err);
+
       openNotificationWithIcon(
         "error",
         "Lỗi",
@@ -2752,12 +2758,11 @@ const Compose1 = () => {
               logigo_tksl: {
                 ...item.logigo_tksl,
                 Tong200:
-                  DocumentElement.DS["Tong200"] -
-                  data200_1 -
-                  data200_thieu.Tongkhongco,
+                  DocumentElement.DS["Tong200"] - data200_thieu?.Tongkhongco ||
+                  0,
                 Tong999:
                   DocumentElement.DS["Tong999"] -
-                  data200_thieu.Tongkhongco -
+                  (data200_thieu?.Tongkhongco || 0) -
                   data200_thua_999,
                 Tong202: DocumentElement.DS["Tong202"] - data200_thua_202,
                 Tong204:
@@ -3007,7 +3012,7 @@ const Compose1 = () => {
                     length: newResult?.length || 0,
                     data: newResult?.map((e: any) => {
                       return {
-                        mtdiep: e?.MTDiep,
+                        mtdiep: e?.MTDTChieu,
                         thoigian: e?.Thoigian,
                         khoaphien: e?.khoaphien,
                         MTDTChieu: e?.MTDTChieu,
@@ -4413,7 +4418,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong203: DocumentElement.DS["Tong203"] - TD203_1,
+                Tong203: DocumentElement.DS["Tong203"],
                 Tong999: DocumentElement.DS["Tong999"] - data203_thua_999,
                 Tong204: DocumentElement.DS["Tong204"] - data203_thua_204,
               },
@@ -4466,7 +4471,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong203: DocumentElement.DS["Tong203"] - TD203_1,
+                Tong203: DocumentElement.DS["Tong203"],
                 Tong999: DocumentElement.DS["Tong999"] - data203_thua_999,
                 Tong204: DocumentElement.DS["Tong204"] - data203_thua_204,
               },
@@ -4860,7 +4865,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
+                Tong206: DocumentElement.DSKQ["Tong206"],
                 Tongphanhoi999:
                   DocumentElement.DSKQ["Tongphanhoi999"] - data206_thua_999,
                 Tongphanhoi204:
@@ -4919,7 +4924,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong206: DocumentElement.DSKQ["Tong206"] - data206_1,
+                Tong206: DocumentElement.DSKQ["Tong206"],
                 Tongphanhoi999:
                   DocumentElement.DSKQ["Tongphanhoi999"] - data206_thua_999,
                 Tongphanhoi204:
@@ -5228,7 +5233,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong300: DocumentElement.DS["Tong300"] - TD300_1,
+                Tong300: DocumentElement.DS["Tong300"],
                 Tong999: DocumentElement.DS["Tong999"] - data300_thua_999,
                 Tong301: DocumentElement.DS["Tong301"] - data300_thua_301,
                 Tong204: DocumentElement.DS["Tong204"] - data300_thua_204,
@@ -5291,7 +5296,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong300: DocumentElement.DS["Tong300"] - TD300_1,
+                Tong300: DocumentElement.DS["Tong300"],
                 Tong999: DocumentElement.DS["Tong999"] - data300_thua_999,
                 Tong301: DocumentElement.DS["Tong301"] - data300_thua_301,
                 Tong204: DocumentElement.DS["Tong204"] - data300_thua_204,
@@ -5714,7 +5719,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
+                Tong303: DocumentElement.DSKQ["Tong303"],
                 Tongphanhoi999:
                   DocumentElement.DSKQ["Tongphanhoi999"] - data303_thua_999,
                 Tongphanhoi301:
@@ -5902,7 +5907,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong303: DocumentElement.DSKQ["Tong303"] - data303_1,
+                Tong303: DocumentElement.DSKQ["Tong303"],
                 Tongphanhoi999:
                   DocumentElement.DSKQ["Tongphanhoi999"] - data303_thua_999,
                 Tongphanhoi301:
@@ -6042,6 +6047,242 @@ const Compose1 = () => {
     }
   };
 
+  const getthongdiep303thieu_MLTDiep_303CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep303thieu_MLTDiepCA2(
+        startDate,
+        endDate,
+        "303"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep303thieu_MLTDiepResponse"
+        ]["Laythongdiep303thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD303_Thieu_303: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep303thieu_MLTDiepCA2"
+      );
+    }
+  };
+
+  const getthongdiep303thieu_MLTDiep_303LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep303thieu_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "303"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep303thieu_MLTDiepResponse"
+        ]["Laythongdiep303thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD303_Thieu_303: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep303thieu_MLTDiepLOGIGO"
+      );
+    }
+  };
+
+  const getthongdiep303thieu_MLTDiep_999CA2 = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep303thieu_MLTDiepCA2(
+        startDate,
+        endDate,
+        "999"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep303thieu_MLTDiepResponse"
+        ]["Laythongdiep303thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                ca2_thieu_du: {
+                  ...item.ca2_thieu_du,
+                  TD303_Thieu_999: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep303thieu_MLTDiepCA2"
+      );
+    }
+  };
+
+  const getthongdiep303thieu_MLTDiep_999LOGIGO = async (
+    startDate: any,
+    endDate: any
+  ) => {
+    try {
+      const response: any = await Laythongdiep303thieu_MLTDiepLOGIGO(
+        startDate,
+        endDate,
+        "999"
+      );
+
+      const dataJson = convertXmlToJson(response);
+      const DocumentElement =
+        dataJson["soap:Envelope"]["soap:Body"][
+          "Laythongdiep303thieu_MLTDiepResponse"
+        ]["Laythongdiep303thieu_MLTDiepResult"]["diffgr:diffgram"][
+          "DocumentElement"
+        ];
+
+      if (DocumentElement) {
+        const newResult = Array.isArray(DocumentElement.DS)
+          ? [...DocumentElement.DS]
+          : [...[DocumentElement.DS]];
+
+        setData((prev: any) => {
+          return prev.map((item: any) => {
+            if (item.key === "303") {
+              return {
+                ...item,
+                logigo_thieu_du: {
+                  ...item.logigo_thieu_du,
+                  TD303_Thieu_999: {
+                    length: newResult?.length || 0,
+                    data:
+                      newResult?.map((e: any) => {
+                        return {
+                          mtdiep: e.MTDiep,
+                          thoigian: e.Thoigian,
+                          khoaphien: e.khoaphien,
+                          IdMessage: e.IdMessage,
+                        };
+                      }) || [],
+                  },
+                },
+              };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (err) {
+      openNotificationWithIcon(
+        "error",
+        "Lỗi",
+        "Có lỗi xảy ra với API Laythongdiep303thieu_MLTDiepLOGIGO"
+      );
+    }
+  };
+
   //Thông điệp 400
   const getDsthongdiep400CA2 = async (startDate: any, endDate: any) => {
     try {
@@ -6078,7 +6319,7 @@ const Compose1 = () => {
               ...item,
               ca2_tksl: {
                 ...item.ca2_tksl,
-                Tong400: DocumentElement.DS["Tong400"] - TD400_1,
+                Tong400: DocumentElement.DS["Tong400"],
                 Tong999: DocumentElement.DS["Tong999"] - data400_thua_999,
                 Tong204: DocumentElement.DS["Tong204"] - data400_thua_204,
               },
@@ -6133,7 +6374,7 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong400: DocumentElement.DS["Tong400"] - TD400_1,
+                Tong400: DocumentElement.DS["Tong400"],
                 Tong999: DocumentElement.DS["Tong999"] - data400_thua_999,
                 Tong204: DocumentElement.DS["Tong204"] - data400_thua_204,
               },
@@ -6188,7 +6429,7 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          MTDiep: e.MTDiep,
+                          mtdiep: e.MTDiep,
                           thoigian: e.Thoigian,
                           khoaphien: e.khoaphien,
                           IdMessage: e.IdMessage,
@@ -6246,7 +6487,7 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          MTDiep: e.MTDiep,
+                          mtdiep: e.MTDiep,
                           thoigian: e.Thoigian,
                           khoaphien: e.khoaphien,
                           IdMessage: e.IdMessage,
@@ -6304,7 +6545,7 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          MTDiep: e.MTDiep,
+                          mtdiep: e.MTDiep,
                           thoigian: e.Thoigian,
                           khoaphien: e.khoaphien,
                           IdMessage: e.IdMessage,
@@ -6362,7 +6603,7 @@ const Compose1 = () => {
                     data:
                       newResult?.map((e: any) => {
                         return {
-                          MTDiep: e.MTDiep,
+                          mtdiep: e.MTDiep,
                           thoigian: e.Thoigian,
                           khoaphien: e.khoaphien,
                           IdMessage: e.IdMessage,
@@ -6545,6 +6786,11 @@ const Compose1 = () => {
         "303",
         tdThua.logigo.TD303
       ),
+
+      getthongdiep303thieu_MLTDiep_303CA2(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_303LOGIGO(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_999CA2(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_999LOGIGO(startDate, endDate),
     ]);
   };
 
@@ -6716,6 +6962,11 @@ const Compose1 = () => {
         "303",
         tdThua.logigo.TD303
       ),
+
+      getthongdiep303thieu_MLTDiep_303CA2(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_303LOGIGO(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_999CA2(startDate, endDate),
+      getthongdiep303thieu_MLTDiep_999LOGIGO(startDate, endDate),
 
       // //Thông điệp 400
       await getDsthongdiep400LOGIGO(startDate, endDate),

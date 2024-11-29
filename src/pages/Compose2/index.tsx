@@ -1195,16 +1195,16 @@ const Compose2 = () => {
                       newResult?.map((e: any) => {
                         return {
                           idTruyennhan: e?.idTruyennhan?.toString(),
-                          MNGui: e.MNGui,
-                          MNNhan: e.MNNhan,
-                          MLTDiep: e.MLTDiep,
-                          MTDiep: e.MTDiep,
-                          MTDTChieu: e.MTDTChieu,
-                          MST: e.MST,
-                          SLuong: e.SLuong?.toString(),
-                          thoigian: e.Thoigian,
-                          Khoaphien: e.Khoaphien,
-                          XMLThongdiep: e.XMLThongdiep,
+                          MNGui: e?.MNGui,
+                          MNNhan: e?.MNNhan,
+                          MLTDiep: e?.MLTDiep,
+                          MTDiep: e?.MTDiep,
+                          MTDTChieu: e?.MTDTChieu,
+                          MST: e?.MST,
+                          SLuong: e?.SLuong?.toString(),
+                          thoigian: e?.Thoigian,
+                          Khoaphien: e?.Khoaphien,
+                          XMLThongdiep: e?.XMLThongdiep,
                         };
                       }) || [],
                   },
@@ -1269,16 +1269,16 @@ const Compose2 = () => {
                       newResult?.map((e: any) => {
                         return {
                           idTruyennhan: e?.idTruyennhan?.toString(),
-                          MNGui: e.MNGui,
-                          MNNhan: e.MNNhan,
-                          MLTDiep: e.MLTDiep,
-                          MTDiep: e.MTDiep,
-                          MTDTChieu: e.MTDTChieu,
-                          MST: e.MST,
-                          SLuong: e.SLuong?.toString(),
-                          thoigian: e.Thoigian,
-                          Khoaphien: e.Khoaphien,
-                          XMLThongdiep: e.XMLThongdiep,
+                          MNGui: e?.MNGui,
+                          MNNhan: e?.MNNhan,
+                          MLTDiep: e?.MLTDiep,
+                          MTDiep: e?.MTDiep,
+                          MTDTChieu: e?.MTDTChieu,
+                          MST: e?.MST,
+                          SLuong: e?.SLuong?.toString(),
+                          thoigian: e?.Thoigian,
+                          Khoaphien: e?.Khoaphien,
+                          XMLThongdiep: e?.XMLThongdiep,
                         };
                       }) || [],
                   },
@@ -1339,8 +1339,14 @@ const Compose2 = () => {
             return item;
           });
         });
+        openNotificationWithIcon("success", "Thành công", MTDTChieu);
+      } else {
+        openNotificationWithIcon(
+          "error",
+          "Lỗi " + MTDTChieu,
+          "Không có dữ liệu"
+        );
       }
-      openNotificationWithIcon("success", "Thành công", MTDTChieu);
     } catch (err) {
       openNotificationWithIcon(
         "error",
@@ -1369,8 +1375,6 @@ const Compose2 = () => {
         const newResult = Array.isArray(DocumentElement.DSKQ)
           ? [...DocumentElement.DSKQ]
           : [...[DocumentElement.DSKQ]];
-
-        console.log(newResult);
 
         setData((prev: any) => {
           return prev.map((item: any) => {

@@ -32,6 +32,15 @@ export const THIEU_DU_303: {
     name: "TĐ thiếu 301 hoặc 204 (không bao gồm TĐ -1):",
     value: "TD303_301_204",
   },
+
+  {
+    name: "Thông điệp 303 thiếu MLTDiep - 303:",
+    value: "TD303_Thieu_303",
+  },
+  {
+    name: "Thông điệp 303 thiếu MLTDiep - 999:",
+    value: "TD303_Thieu_999",
+  },
   {
     name: "Lấy thông điệp thừa:",
     value: "TD303_Lay_thua_303",
@@ -59,6 +68,14 @@ export type DataType303 = {
       length: number;
       data: any[];
     };
+    TD303_Thieu_303: {
+      length: number;
+      data: any[];
+    };
+    TD303_Thieu_999: {
+      length: number;
+      data: any[];
+    };
     TD303_Lay_thua_303: {
       length: number;
       data: any[];
@@ -76,6 +93,14 @@ export type DataType303 = {
       data: any[];
     };
     TD303_301_204: {
+      length: number;
+      data: any[];
+    };
+    TD303_Thieu_303: {
+      length: number;
+      data: any[];
+    };
+    TD303_Thieu_999: {
       length: number;
       data: any[];
     };
@@ -102,6 +127,14 @@ export const initialData303: any = {
       length: 0,
       data: [],
     },
+    TD303_Thieu_303: {
+      length: 0,
+      data: [],
+    },
+    TD303_Thieu_999: {
+      length: 0,
+      data: [],
+    },
     TD303_Lay_thua_303: {
       length: 0,
       data: [],
@@ -119,6 +152,14 @@ export const initialData303: any = {
       data: [],
     },
     TD303_301_204: {
+      length: 0,
+      data: [],
+    },
+    TD303_Thieu_303: {
+      length: 0,
+      data: [],
+    },
+    TD303_Thieu_999: {
       length: 0,
       data: [],
     },

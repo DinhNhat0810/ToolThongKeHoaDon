@@ -28,32 +28,32 @@ const props: UploadProps = {
   showUploadList: false,
 };
 
-function getObjectFromData(data: any) {
-  const result: any = {};
+// function getObjectFromData(data: any) {
+//   const result: any = {};
 
-  // Lấy tiêu đề cột từ hàng đầu tiên
-  const headers: any = data[0];
+//   // Lấy tiêu đề cột từ hàng đầu tiên
+//   const headers: any = data[0];
 
-  // Khởi tạo các mảng rỗng cho mỗi tiêu đề cột
-  headers.forEach((header: any) => {
-    result[header] = [];
-  });
+//   // Khởi tạo các mảng rỗng cho mỗi tiêu đề cột
+//   headers.forEach((header: any) => {
+//     result[header] = [];
+//   });
 
-  // Tạo object với các cặp key-value
-  for (let i = 1; i < data.length; i++) {
-    const row = data[i];
-    console.log(row, i);
+//   // Tạo object với các cặp key-value
+//   for (let i = 1; i < data.length; i++) {
+//     const row = data[i];
+//     console.log(row, i);
 
-    headers.forEach((header: any, index: any) => {
-      console.log(header, row[index]);
+//     headers.forEach((header: any, index: any) => {
+//       console.log(header, row[index]);
 
-      result[header].push(row[index]);
-      console.log(result);
-    });
-  }
+//       result[header].push(row[index]);
+//       console.log(result);
+//     });
+//   }
 
-  return result;
-}
+//   return result;
+// }
 
 const UploadExcel = ({
   onSetDataExcelUpload,

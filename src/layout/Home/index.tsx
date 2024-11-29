@@ -35,11 +35,11 @@ const Home = ({ children }: Props) => {
       icon: <HomeOutlined />,
     },
 
-    {
-      key: "/category",
-      label: "Danh mục",
-      icon: <HomeOutlined />,
-    },
+    // {
+    //   key: "/category",
+    //   label: "Danh mục",
+    //   icon: <HomeOutlined />,
+    // },
   ];
 
   useEffect(() => {

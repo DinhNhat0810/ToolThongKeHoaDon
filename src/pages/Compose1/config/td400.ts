@@ -7,7 +7,7 @@ export const TKTD_400: {
     value: "Tong400",
   },
   {
-    name: "Thông điệp nhận 999-300:",
+    name: "Thông điệp nhận 999-400:",
     value: "Tong999",
   },
   {
