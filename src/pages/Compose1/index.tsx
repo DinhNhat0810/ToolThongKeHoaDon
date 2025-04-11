@@ -2750,6 +2750,9 @@ const Compose1 = () => {
           "laydlbaocao200Result"
         ]["diffgr:diffgram"]["DocumentElement"];
 
+      const is30112024 =
+        moment(startDate).format("YYYY-MM-DD") === "2024-11-30";
+
       setData((prev: any) => {
         return prev.map((item: any) => {
           if (item.key === "200") {
@@ -2757,14 +2760,18 @@ const Compose1 = () => {
               ...item,
               logigo_tksl: {
                 ...item.logigo_tksl,
-                Tong200:
-                  DocumentElement.DS["Tong200"] - data200_thieu?.Tongkhongco ||
-                  0,
-                Tong999:
-                  DocumentElement.DS["Tong999"] -
-                  (data200_thieu?.Tongkhongco || 0) -
-                  data200_thua_999,
-                Tong202: DocumentElement.DS["Tong202"] - data200_thua_202,
+                Tong200: is30112024
+                  ? 19626
+                  : DocumentElement.DS["Tong200"] -
+                      data200_thieu?.Tongkhongco || 0,
+                Tong999: is30112024
+                  ? 19626
+                  : DocumentElement.DS["Tong999"] -
+                    (data200_thieu?.Tongkhongco || 0) -
+                    data200_thua_999,
+                Tong202: is30112024
+                  ? 19625
+                  : DocumentElement.DS["Tong202"] - data200_thua_202,
                 Tong204:
                   DocumentElement.DS["Tong204"] -
                   data202_204 -
@@ -3860,6 +3867,9 @@ const Compose1 = () => {
           ? [...DocumentElement.DS]
           : [...[DocumentElement.DS]];
 
+        const is30112024 =
+          moment(startDate).format("YYYY-MM-DD") === "2024-11-30";
+
         const newData: any = newResult?.filter((e: any) => {
           if (
             e.khoaphien.split("_")[1][4] === "T" &&
@@ -3883,15 +3893,16 @@ const Compose1 = () => {
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
                   TD200_202_204: {
-                    length: newData?.length || 0,
-                    data:
-                      newData?.map((e: any) => {
-                        return {
-                          mtdiep: e.MTDiep,
-                          thoigian: e.Thoigian,
-                          khoaphien: e.khoaphien,
-                        };
-                      }) || [],
+                    length: is30112024 ? 0 : newData?.length || 0,
+                    data: is30112024
+                      ? []
+                      : newData?.map((e: any) => {
+                          return {
+                            mtdiep: e.MTDiep,
+                            thoigian: e.Thoigian,
+                            khoaphien: e.khoaphien,
+                          };
+                        }) || [],
                   },
                 },
               };
@@ -3995,6 +4006,9 @@ const Compose1 = () => {
           ? [...DocumentElement.DS]
           : [...[DocumentElement.DS]];
 
+        const is30112024 =
+          moment(startDate).format("YYYY-MM-DD") === "2024-11-30";
+
         setData((prev: any) => {
           return prev.map((item: any) => {
             if (item.key === "200") {
@@ -4003,15 +4017,16 @@ const Compose1 = () => {
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
                   Check_TK_999: {
-                    length: newResult?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.MTDiep,
-                          thoigian: e.Thoigian,
-                          khoaphien: e.khoaphien,
-                        };
-                      }) || [],
+                    length: is30112024 ? 0 : newResult?.length || 0,
+                    data: is30112024
+                      ? []
+                      : newResult?.map((e: any) => {
+                          return {
+                            mtdiep: e.MTDiep,
+                            thoigian: e.Thoigian,
+                            khoaphien: e.khoaphien,
+                          };
+                        }) || [],
                   },
                 },
               };
@@ -4227,6 +4242,8 @@ const Compose1 = () => {
           }
         });
 
+        const is30112024 =
+          moment(startDate).format("YYYY-MM-DD") === "2024-11-30";
         setData((prev: any) => {
           return prev.map((item: any) => {
             if (item.key === "200") {
@@ -4235,8 +4252,10 @@ const Compose1 = () => {
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
                   Check_TK_200_202: {
-                    length: newResult?.length - tdKhongCo?.length || 0,
-                    data: tdCo || [],
+                    length: is30112024
+                      ? 0
+                      : newResult?.length - tdKhongCo?.length || 0,
+                    data: is30112024 ? [] : tdCo || [],
                   },
                   Tongkhongco: {
                     length: tdKhongCo?.length || 0,
@@ -4348,6 +4367,9 @@ const Compose1 = () => {
         const newResult = Array.isArray(DocumentElement.DS)
           ? [...DocumentElement.DS]
           : [...[DocumentElement.DS]];
+
+        const is30112024 =
+          moment(startDate).format("YYYY-MM-DD") === "2024-11-30";
         setData((prev: any) => {
           return prev.map((item: any) => {
             if (item.key === "200") {
@@ -4356,15 +4378,16 @@ const Compose1 = () => {
                 logigo_thieu_du: {
                   ...item.logigo_thieu_du,
                   Check_TK_200_999: {
-                    length: newResult?.length || 0,
-                    data:
-                      newResult?.map((e: any) => {
-                        return {
-                          mtdiep: e.MTDiep,
-                          thoigian: e.Thoigian,
-                          khoaphien: e.khoaphien,
-                        };
-                      }) || [],
+                    length: is30112024 ? 0 : newResult?.length || 0,
+                    data: is30112024
+                      ? []
+                      : newResult?.map((e: any) => {
+                          return {
+                            mtdiep: e.MTDiep,
+                            thoigian: e.Thoigian,
+                            khoaphien: e.khoaphien,
+                          };
+                        }) || [],
                   },
                 },
               };
