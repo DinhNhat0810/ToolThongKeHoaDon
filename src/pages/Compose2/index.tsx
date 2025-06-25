@@ -1178,9 +1178,9 @@ const Compose2 = () => {
         ];
 
       if (DocumentElement) {
-        const newResult = Array.isArray(DocumentElement.DS1)
-          ? [...DocumentElement.DS1]
-          : [...[DocumentElement.DS1]];
+        const newRes = DocumentElement.DS1 || DocumentElement.DS;
+
+        const newResult = Array.isArray(newRes) ? [...newRes] : [...[newRes]];
 
         setData((prev: any) => {
           return prev.map((item: any) => {
@@ -1252,9 +1252,9 @@ const Compose2 = () => {
         ];
 
       if (DocumentElement) {
-        const newResult = Array.isArray(DocumentElement.DS1)
-          ? [...DocumentElement.DS1]
-          : [...[DocumentElement.DS1]];
+        const newRes = DocumentElement.DS1 || DocumentElement.DS;
+
+        const newResult = Array.isArray(newRes) ? [...newRes] : [...[newRes]];
 
         setData((prev: any) => {
           return prev.map((item: any) => {
